@@ -12,5 +12,26 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::middleware('auth')->group(function () {
+
+    Route::prefix('barang')->group(function () {
+        //tampilan
+        Route::get('/', 'BarangController@index')->name('barang-index');
+    });
+
+
+});
+
+// Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/barang', 'BarangController@index')->name('barang-index');
+// Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');
