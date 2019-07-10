@@ -73,7 +73,7 @@
                     </form>
                     <a href="{{ route('logout') }}" onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">
-                        <i class="fa fa-power-off fa-lg" style="margin-top: 10px; margin-right: 15px;"></i>
+                        <i class="fa fa-power-off fa-lg" style="margin-top: 10px;"></i>
                     </a>
                 </li>
 

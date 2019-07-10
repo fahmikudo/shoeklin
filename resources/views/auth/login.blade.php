@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
-    <title>{{ config('app.name', 'Minutes of Meeting') }}</title>
+    <title>{{ config('app.name', 'Shoeklin') }}</title>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/jquery.min.js') }}"></script>
@@ -37,7 +37,7 @@
                 <div class="col-md-4 col-md-offset-4">
                     <div class="login-panel panel panel-default">
                         <div class="panel-heading" style="text-align:center;">
-                            <h1 class="panel-title"><img class="logo" src="{{ asset('img/logo.png') }}"/></h1>
+                            <h1 class="panel-title"><img class="logo" src="{{ asset('img/logo.jpeg') }}"/></h1>
                         </div>
                         <div class="panel-body">
                             <form method="POST" action="{{ route('login') }}">
