@@ -19,15 +19,22 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::middleware('auth')->group(function () {
-
     Route::prefix('barang')->group(function () {
         //tampilan
         Route::get('/', 'BarangController@index')->name('barang-index');
+        Route::post('/create', 'BarangController@store')->name('barang-create');
+        Route::get('/search','BarangController@search')->name('barang-search');
+        Route::get('/{idBahanBaku}', 'BarangController@byId')->name('barang-by-id');
+        Route::post('/put', 'BarangController@update')->name('barang-update');
     });
 
     Route::prefix('jenispelayanan')->group(function () {
         //tampilan
         Route::get('/', 'JenisPelayananController@index')->name('jenispelayanan-index');
+        Route::post('/create', 'JenisPelayananController@store')->name('jenis-pelayanan-create');
+        Route::get('/search','JenisPelayananController@search')->name('jenis-pelayanan-search');
+        Route::get('/{idJenisPelayanan}', 'JenisPelayananController@byId')->name('jenis-pelayanan-by-id');
+        Route::post('/put', 'JenisPelayananController@update')->name('jenis-pelayanan-update');
     });
 
     Route::prefix('pelanggan')->group(function () {

@@ -39,15 +39,19 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @php $index = 0; @endphp
+                                @foreach ($jenispelayanan as $jp)
+                                @php $index += 1 @endphp
                                 <tr>
-                                    <td>1</td>
-                                    <td>Cleaning</td>
-                                    <td>60000</td>
+                                    <td>{{ $index }}</td>
+                                    <td>{{ $jp->nama_pelayanan }}</td>
+                                    <td>{{ $jp->harga_pelayanan }}</td>
                                     <td class="detail-info" href="#">
                                         <a class="detail-info" href="#">
                                             <button
                                                 class="btn btn-primary"
                                                 data-toggle="modal"
+                                                onclick="editModal('{{ $jp->id }}')"
                                                 data-target="#editModal">
                                                 <i class="fa fa-edit fa-fw"></i>
                                                 Edit
@@ -60,38 +64,35 @@
                                         </a>
                                     </td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
                     <div class="row">
                         <div class="pull-right" id="page-control">
                             <ul class="pagination">
-                                <li class="active"><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
+                                {{ $jenispelayanan->links() }}
                             </ul>
                         </div>
                     </div>
                     <!-- Modal Create -->
                     <div class="modal fade" id="createModal" role="dialog">
-                        <div class="modal-dialog">
-                            <!-- Modal content-->
+                        <div class="modal-dialog">                            
                             <div class="modal-content">
-                                <form action="" method="POST">
+                                <form action="{{ route('jenis-pelayanan-create') }}" method="POST">
+                                    @csrf
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                         <h4 class="modal-title">Tambah Jenis Pelayanan</h4>
                                     </div>
                                     <div class="modal-body">
                                         <div class="form-group">
-                                            <label for="nama-project">Nama Jenis Pelayanan</label>
-                                            <input type="text" class="form-control" name="nama-project" required id="nama-project" placeholder="Jenis Pelayanan">
+                                            <label for="nama-jenis-pelayanan">Nama Jenis Pelayanan</label>
+                                            <input type="text" class="form-control" name="nama_pelayanan" required placeholder="Jenis Pelayanan">
                                         </div>
                                         <div class="form-group">
-                                            <label for="nama-project">Harga Jenis Pelayanan</label>
-                                            <input type="text" class="form-control" name="nama-project" required id="nama-project" placeholder="Harga Pelayanan">
+                                            <label for="harga-jenis-pelayanan">Harga Jenis Pelayanan</label>
+                                            <input type="text" class="form-control" name="harga_pelayanan" required placeholder="Harga Pelayanan">
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -105,21 +106,22 @@
                     <!-- Modal Edit -->
                     <div class="modal fade" id="editModal" role="dialog">
                         <div class="modal-dialog">
-                            <!-- Modal content-->
                             <div class="modal-content">
-                                <form action="" method="POST">
+                                <form action="{{ route('jenis-pelayanan-update') }}" method="POST">
+                                    @csrf
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                         <h4 class="modal-title">Edit Jenis Pelayanan</h4>
                                     </div>
                                     <div class="modal-body">
+                                        <input type="hidden" name="id-jenis-pelayanan" id="edit-id-jenis-pelayanan">
                                         <div class="form-group">
                                             <label for="nama-project">Nama Jenis Pelayanan</label>
-                                            <input type="text" class="form-control" name="nama-project" required id="nama-project" placeholder="Jenis Pelayanan">
+                                            <input type="text" class="form-control" name="nama_pelayanan" required id="edit-jenis-pelayanan" placeholder="Jenis Pelayanan">
                                         </div>
                                         <div class="form-group">
                                             <label for="nama-project">Harga Jenis Pelayanan</label>
-                                            <input type="text" class="form-control" name="nama-project" required id="nama-project" placeholder="Harga Pelayanan">
+                                            <input type="text" class="form-control" name="harga_pelayanan" required id="edit-harga-pelayanan" placeholder="Harga Pelayanan">
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -153,4 +155,20 @@
         </div>
     </div>
 </div>
+<script>
+    function editModal(idJenisPelayanan) {
+        $.ajax({
+            type: "GET",
+            url: "{{ url('jenispelayanan/') }}"+'/'+idJenisPelayanan,
+            data: "data",
+            dataType: "json",
+            success: function (response) {
+                console.log(response[0]);
+                $('#edit-id-jenis-pelayanan').val(response[0].id);
+                $('#edit-jenis-pelayanan').val(response[0].nama_pelayanan);
+                $('#edit-harga-pelayanan').val(response[0].harga_pelayanan);
+            }
+        });
+    }
+</script>
 @endsection
