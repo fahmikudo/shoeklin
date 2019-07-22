@@ -24,7 +24,7 @@
                         </div>
                         <div class="row profile-info-row">
                             <div class="col-md-2 profile-info">Nomor Telpon</div>
-                            <div class="col-md-8" id="noTelp">{{ Auth::user()->no_hp }}</div>
+                            <div class="col-md-8" id="noTelp">{{ Auth::user()->no_telepon }}</div>
                         </div>
                         <div class="row profile-info-row">
                             <div class="col-md-2 profile-info">Jabatan</div>

@@ -37,21 +37,27 @@
                                     <th>Alamat</th>
                                     <th>No. Telepon</th>
                                     <th>Status Member</th>
+                                    <th>Jumlah Pencucian</th>
                                     <th class="text-right"></th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @php $index = 0; @endphp
+                                @foreach ($pelanggan as $plg)
+                                @php $index += 1 @endphp
                                 <tr>
-                                    <td>1</td>
-                                    <td>Aditya M Farhan</td>
-                                    <td>Jl. Cijati No. 2 Majalengka Kulon</td>
-                                    <td>08997345956</td>
-                                    <td>ACTIVE</td>
-                                    <td class="detail-info" href="#">
+                                    <td>{{ $index }}</td>
+                                    <td>{{ $plg->nama_pelanggan }}</td>
+                                    <td>{{ $plg->alamat_pelanggan }}</td>
+                                    <td>{{ $plg->no_telepon }}</td>
+                                    <td>{{ $plg->status_member }}</td>
+                                    <td>{{ $plg->jumlah_pencucian }}</td>
+                                    <td style="width: 200px;" class="detail-info" href="#">
                                         <a class="detail-info" href="#">
                                             <button
                                                 class="btn btn-primary"
                                                 data-toggle="modal"
+                                                onclick="editModal('{{ $plg->id }}')"
                                                 data-target="#editModal">
                                                 <i class="fa fa-edit fa-fw"></i>
                                                 Edit
@@ -64,17 +70,14 @@
                                         </a>
                                     </td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
                     <div class="row">
                         <div class="pull-right" id="page-control">
                             <ul class="pagination">
-                                <li class="active"><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
+                                {{ $pelanggan->links() }}
                             </ul>
                         </div>
                     </div>
@@ -83,7 +86,8 @@
                         <div class="modal-dialog">
                             <!-- Modal content-->
                             <div class="modal-content">
-                                <form action="" method="POST">
+                                <form action="{{ route('pelanggan-create') }}" method="POST">
+                                    @csrf
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                         <h4 class="modal-title">Tambah Pelanggan</h4>
@@ -91,22 +95,26 @@
                                     <div class="modal-body">
                                         <div class="form-group">
                                             <label for="nama-project">Nama Pelanggan</label>
-                                            <input type="text" class="form-control" name="nama-project" required id="nama-project" placeholder="Nama Pelanggan">
+                                            <input type="text" class="form-control" name="nama_pelanggan" required id="nama-pelanggan" placeholder="Nama Pelanggan">
                                         </div>
                                         <div class="form-group">
                                             <label for="nama-project">Nomor Telepon</label>
-                                            <input type="text" class="form-control" name="nama-project" required id="nama-project" placeholder="Nomor Telepon">
+                                            <input type="text" class="form-control" name="no_telepon" required id="no-telepon" placeholder="Nomor Telepon">
                                         </div>
                                         <div class="form-group">
                                             <label for="nama-project">Status</label>
-                                            <select class="form-control" name="id-project" id="sel1">
-                                                <option value="ACTIVE">ACTIVE</option>
-                                                <option value="INACTIVE">INACTIVE</option>
+                                            <select class="form-control" name="status_member" id="sel1">
+                                                <option value="MEMBER">MEMBER</option>
+                                                <option value="NON MEMBER">NON MEMBER</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="nama-project">Alamat</label>
-                                            <input type="text" class="form-control" name="nama-project" required id="nama-project" placeholder="Alamat">
+                                            <input type="text" class="form-control" name="alamat_pelanggan" required id="alamat" placeholder="Alamat">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="nama-project">Jumlah Pencucian</label>
+                                            <input type="text" class="form-control" name="jumlah_pencucian" required id="jumlah-pencucian" placeholder="Jumlah Pencucian">
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -122,30 +130,36 @@
                         <div class="modal-dialog">
                             <!-- Modal content-->
                             <div class="modal-content">
-                                <form action="" method="POST">
+                                <form action="{{ route('pelanggan-update') }}" method="POST">
+                                    @csrf
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title">Edit Jenis Pelanggan</h4>
+                                        <h4 class="modal-title">Edit Pelanggan</h4>
                                     </div>
                                     <div class="modal-body">
+                                        <input type="hidden" name="id-pelanggan" id="edit-id-pelanggan">
                                         <div class="form-group">
                                             <label for="nama-project">Nama Pelanggan</label>
-                                            <input type="text" class="form-control" name="nama-project" required id="nama-project" placeholder="Nama Pelanggan">
+                                            <input type="text" class="form-control" name="nama_pelanggan" required id="edit-nama-pelanggan" placeholder="Nama Pelanggan">
                                         </div>
                                         <div class="form-group">
                                             <label for="nama-project">Nomor Telepon</label>
-                                            <input type="text" class="form-control" name="nama-project" required id="nama-project" placeholder="Nomor Telepon">
+                                            <input type="text" class="form-control" name="no_telepon" required id="edit-no-telepon" placeholder="Nomor Telepon">
                                         </div>
                                         <div class="form-group">
                                             <label for="nama-project">Status</label>
-                                            <select class="form-control" name="id-project" id="sel1">
-                                                <option value="ACTIVE">ACTIVE</option>
-                                                <option value="INACTIVE">INACTIVE</option>
+                                            <select class="form-control" name="status_member" id="edit-status">
+                                                <option value="MEMBER">MEMBER</option>
+                                                <option value="NON MEMBER">NON MEMBER</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="nama-project">Alamat</label>
-                                            <input type="text" class="form-control" name="nama-project" required id="nama-project" placeholder="Alamat">
+                                            <input type="text" class="form-control" name="alamat_pelanggan" required id="edit-alamat" placeholder="Alamat">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="nama-project">Jumlah Pencucian</label>
+                                            <input type="text" class="form-control" name="jumlah_pencucian" required id="edit-jumlah-pencucian" placeholder="Alamat">
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -179,4 +193,23 @@
         </div>
     </div>
 </div>
+<script>
+    function editModal(idPelanggan) {
+        $.ajax({
+            type: "GET",
+            url: "{{ url('pelanggan/') }}"+'/'+idPelanggan,
+            data: "data",
+            dataType: "json",
+            success: function (response) {
+                console.log(response[0]);
+                $('#edit-id-pelanggan').val(response[0].id);
+                $('#edit-nama-pelanggan').val(response[0].nama_pelanggan);
+                $('#edit-no-telepon').val(response[0].no_telepon);
+                $('#edit-alamat').val(response[0].alamat_pelanggan);
+                $('#edit-status').val(response[0].status_member);
+                $('#edit-jumlah-pencucian').val(response[0].jumlah_pencucian);
+            }
+        });
+    }
+</script>
 @endsection

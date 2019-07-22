@@ -18,6 +18,8 @@ class CreatePelangganTable extends Migration
             $table->string('nama_pelanggan');
             $table->string('alamat_pelanggan');
             $table->string('no_telepon');
+            $table->enum('status_member', ['MEMBER', 'NON MEMBER']);
+            $table->integer('jumlah_pencucian');
             $table->timestamps();
         });
     }

@@ -13,9 +13,12 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $user = User::create([
-        'name'  => str_random(20),
-        'email' => str_random(10) . '@kudos.com',
-        'password'  => bcrypt('secret')
-]);
+            'name'  => 'Fahmi Kudo',
+            'email' => 'admin@fahmikudo.web.id',
+            'password'  => bcrypt('kudo12'),
+            'jabatan' => 'ADMIN',
+            'no_telepon' => '085320300227',
+            'alamat' => 'Jl. Sukasari II No. 290'
+        ]);
     }
 }

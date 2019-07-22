@@ -21,6 +21,7 @@ class CreateTransaksiTable extends Migration
             $table->string('tipe_sepatu');
             $table->integer('jumlah_sepatu');
             $table->integer('harga_total');
+            $table->string('status_pengiriman');
             $table->integer('id_pelangan');
             $table->integer('id_pelayanan');
             $table->integer('id_pegawai');

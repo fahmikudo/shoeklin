@@ -88,6 +88,24 @@ class BarangController extends Controller
         }
     }
 
+    public function removeAjax(Request $request)
+    {
+        // $idBahanBaku = $request['id-bahan-baku'];
+        return json_encode([
+            'status' => 'success',
+            'message' => 'ahuy'
+        ]);
+        // $rest = BahanBaku::Delete($idBahanBaku);
+        // if($rest)
+        // {
+        //     return redirect(route('barang-index'));
+        // }
+        // else
+        // {
+        //     return redirect(route('errors/404'));
+        // }
+    }
+
     public function search()
     {
         $keyword = $_GET['keyword'];

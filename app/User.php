@@ -36,4 +36,23 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function scopeRemove($query, $id)
+    {
+        return $this
+                ->where('id', $id)
+                ->delete();
+    }
+
+    public function scopeSearch($query, $keyword, $limit)
+    {
+        return $this
+                ->where(
+                    'name','like',"%$keyword%"
+                )
+                ->where(
+                    'email','like',"%$keyword%"
+                )
+                ->simplePaginate($limit);
+    }
 }

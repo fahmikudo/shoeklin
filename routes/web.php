@@ -19,6 +19,17 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::middleware('auth')->group(function () {
+    Route::prefix('pegawai')->group(function () {
+        //tampilan
+        Route::get('/', 'PegawaiController@index')->name('pegawai-index');
+        Route::get('/search','PegawaiController@search')->name('pegawai-search');
+        Route::get('/{idPegawai}', 'PegawaiController@byId')->name('pegawai-by-id');
+
+        //crud
+        Route::post('/create', 'PegawaiController@store')->name('pegawai-create');
+        Route::post('/put', 'PegawaiController@put')->name('pegawai-put');
+        Route::post('/remove', 'PegawaiController@remove')->name('pegawai-remove');
+    });
     Route::prefix('barang')->group(function () {
         //tampilan
         Route::get('/', 'BarangController@index')->name('barang-index');
@@ -26,6 +37,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/search','BarangController@search')->name('barang-search');
         Route::get('/{idBahanBaku}', 'BarangController@byId')->name('barang-by-id');
         Route::post('/put', 'BarangController@update')->name('barang-update');
+        Route::post('/remove', 'BarangController@removeAjax')->name('barang-delete');
     });
 
     Route::prefix('jenispelayanan')->group(function () {
@@ -40,12 +52,16 @@ Route::middleware('auth')->group(function () {
     Route::prefix('pelanggan')->group(function () {
         //tampilan
         Route::get('/', 'PelangganController@index')->name('pelanggan-index');
+        Route::post('/create', 'PelangganController@store')->name('pelanggan-create');
+        Route::get('/search', 'PelangganController@search')->name('pelanggan-search');
+        Route::get('/{idPelanggan}','PelangganController@byId')->name('pelanggan-by-id');
+        Route::post('/put', 'PelangganController@update')->name('pelanggan-update');
     });
 
-    Route::prefix('pegawai')->group(function () {
-        //tampilan
-        Route::get('/', 'PegawaiController@index')->name('pegawai-index');
-    });
+    // Route::prefix('pegawai')->group(function () {
+    //     //tampilan
+    //     Route::get('/', 'PegawaiController@index')->name('pegawai-index');
+    // });
 
     Route::prefix('transaksi')->group(function () {
         //tampilan

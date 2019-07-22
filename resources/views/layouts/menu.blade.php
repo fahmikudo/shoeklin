@@ -19,9 +19,11 @@
             <li>
                 <a href="{{ route('penyerahan-index') }}"><i class="fa fa-bars fa-fw"></i> Transaksi </a>
             </li>
+            @if (Auth::user()->jabatan == 'admin')
             <li>
                 <a href="{{ route('report-index') }}"><i class="fa fa-bars fa-fw"></i> Report </a>
             </li>
+            @endif
         </ul>
     </div>
 </div>
