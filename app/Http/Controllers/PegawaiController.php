@@ -66,6 +66,27 @@ class PegawaiController extends Controller
         }
     }
 
+    public function removeAjax(Request $request)
+    {
+        $idPegawai = $request['idPegawai'];
+        $rest = User::find($idPegawai);
+        $rest = $rest->delete();
+        if($rest)
+        {
+            return json_encode([
+                'status' => 'success',
+                'message' => 'Sukses Menghapus Data !'
+            ]);
+        }
+        else
+        {
+            return json_encode([
+                'status' => 'error',
+                'message' => 'Gagal Menghapus Data !'
+            ]);
+        }
+    }
+
     public function remove(Request $request)
     {
         $id = $request['id-pegawai-remove'];

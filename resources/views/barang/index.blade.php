@@ -95,6 +95,7 @@
                                         <h4 class="modal-title">Tambah Barang</h4>
                                     </div>
                                     <div class="modal-body">
+                                        <input type="hidden" name="id-bahan-baku" id="edit-id-bahan-baku">
                                         <div class="form-group">
                                             <label for="nama-project">Nama Bahan Baku</label>
                                             <input type="text" class="form-control" name="nama_bahan_baku" required placeholder="Nama Bahan Baku">
@@ -171,7 +172,7 @@
                             </div>
                             <div class="modal-footer">
                                 <meta name="csrf-token" content="{{ csrf_token() }}">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-default" id="btn-close-confirmDelete" data-dismiss="modal">Cancel</button>
                                 <button type="button" class="btn btn-danger" data-id="$barangs->id" id="confirm">Delete</button>
                             </div>
                             </div>
@@ -187,7 +188,6 @@
         $('#confirm').on('click', function () {
             var route = "{{ route('barang-delete') }}";
             var token = $("meta[name='csrf-token']").attr("content");
-            console.log(route);
             $.ajax({
                 type: "post",
                 url: route,
@@ -198,14 +198,15 @@
                 }
             })
             .done(function(data) {
-                console.log('done => '+data);
+                if(data.status == "error") return alert("Gagal Menghapus Data !");
+                $("#confirmDelete").children().children().children().children()[4].click()
+                setTimeout(() => {
+                    window.location.reload();
+                }, 500);
             })
             .fail(function(e) {
                 console.log('error => '+e.responseJSON.message);
             })
-            .always(function() {
-                console.log('done')
-            });
         });
     }
     function editModal(idBahanBaku) {

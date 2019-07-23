@@ -53,10 +53,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $i = 1; ?>
+                                @php $index = 0; @endphp
                                 @foreach ($user as $us)
+                                @php $index += 1 @endphp
                                     <tr>
-                                        <td>{{ $i }}</td>
+                                        <td>{{ $index }}</td>
                                         <td>{{ $us->name }}</td>
                                         <td>{{ $us->email }}</td>
                                         <td>{{ $us->jabatan }}</td>
@@ -72,15 +73,18 @@
                                                     <i class="fa fa-edit fa-fw"></i>Edit
                                                 </button>
                                             </a>
-                                            <a href="{{ route('pegawai-remove') }}" onclick="event.preventDefault();
-                                                document.getElementById('deletePegawai'+{{ $us->id }}).submit();">
-                                                <button class="btn btn-danger">
+                                            <a href="#">
+                                                <button
+                                                    onclick="deleteModal('{{ $us->id }}')"
+                                                    class="btn btn-danger" 
+                                                    data-toggle="modal" 
+                                                    data-target="#confirmDelete" 
+                                                    class="btn btn-danger">
                                                     <i class="fa fa-trash fa-fw"></i>Delete
                                                 </button>
                                             </a>
                                         </td>
                                     </tr>
-                                    <?php $i++; ?>
                                 @endforeach
                             </tbody>
                         </table>
@@ -244,17 +248,61 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Save</button>
+                                    <button type="submit" data-id="$user->id" class="btn btn-primary">Save</button>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
+                <!-- Modal Dialog -->
+                <div class="modal fade" id="confirmDelete" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h4 class="modal-title">Delete Parmanently</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Are you sure about this ?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <meta name="csrf-token" content="{{ csrf_token() }}">
+                                <button type="button" class="btn btn-default" id="btn-close-confirmDelete" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-danger" data-id="$user->id" id="confirm">Delete</button>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
             </div>
         </div>
     </div>
 </div>
 <script>
+    function deleteModal(idPegawai) {
+        $('#confirm').on('click', function () {
+            var route = "{{ route('pegawai-remove') }}";
+            var token = $("meta[name='csrf-token']").attr("content");
+            $.ajax({
+                type: "post",
+                url: route,
+                dataType: "json",
+                data: {
+                    'idPegawai': idPegawai,
+                    '_token': token
+                }
+            })
+            .done(function(data) {
+                if(data.status == "error") return alert("Gagal Menghapus Data !");
+                $("#confirmDelete").children().children().children().children()[4].click()
+                setTimeout(() => {
+                    window.location.reload();
+                }, 500);
+            })
+            .fail(function(e) {
+                console.log('error => '+e.responseJSON.message);
+            })
+        });
+    }
     function editModal(idPegawai) {
         $.ajax({
             type: "GET",

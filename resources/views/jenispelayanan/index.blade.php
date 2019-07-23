@@ -58,7 +58,11 @@
                                             </button>
                                         </a>
                                         <a href="#">
-                                            <button class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete">
+                                            <button 
+                                                onclick="deleteModal('{{ $jp->id }}')"
+                                                class="btn btn-danger" 
+                                                data-toggle="modal" 
+                                                data-target="#confirmDelete">
                                                 <i class="fa fa-trash fa-fw"></i>Delete
                                             </button>
                                         </a>
@@ -144,8 +148,9 @@
                                 <p>Are you sure about this ?</p>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-danger" id="confirm">Delete</button>
+                                <meta name="csrf-token" content="{{ csrf_token() }}">
+                                <button type="button" class="btn btn-default" id="btn-close-confirmDelete" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-danger" data-id="$jenispelayanan->id" id="confirm">Delete</button>
                             </div>
                             </div>
                         </div>
@@ -156,6 +161,31 @@
     </div>
 </div>
 <script>
+    function deleteModal(idJenisPelayanan) {
+        $('#confirm').on('click', function () {
+            var route = "{{ route('jenis-pelayanan-delete') }}";
+            var token = $("meta[name='csrf-token']").attr("content");
+            $.ajax({
+                type: "post",
+                url: route,
+                dataType: "json",
+                data: {
+                    'id-jenis-pelayanan': idJenisPelayanan,
+                    '_token': token
+                }
+            })
+            .done(function(data) {
+                if(data.status == "error") return alert("Gagal Menghapus Data !");
+                $("#confirmDelete").children().children().children().children()[4].click()
+                setTimeout(() => {
+                    window.location.reload();
+                }, 500);
+            })
+            .fail(function(e) {
+                console.log('error => '+e.responseJSON.message);
+            })
+        });
+    }
     function editModal(idJenisPelayanan) {
         $.ajax({
             type: "GET",

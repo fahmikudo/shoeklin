@@ -78,6 +78,27 @@ class PelangganController extends Controller
 
     }
 
+    public function removeAjax(Request $request)
+    {
+        $idPelanggan = $request['id-pelanggan'];
+        $rest = Pelanggan::find($idPelanggan);
+        $rest = $rest->delete();
+        if($rest)
+        {
+            return json_encode([
+                'status' => 'success',
+                'message' => 'Sukses Menghapus Data !'
+            ]);
+        }
+        else
+        {
+            return json_encode([
+                'status' => 'error',
+                'message' => 'Gagal Menghapus Data !'
+            ]);
+        }
+    }
+
     public function remove(Request $request)
     {
         $idPelanggan = $request['id-pelanggan'];

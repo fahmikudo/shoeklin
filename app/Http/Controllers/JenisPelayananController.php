@@ -64,4 +64,25 @@ class JenisPelayananController extends Controller
         }
     }
 
+    public function removeAjax(Request $request)
+    {
+        $idJenisPelayanan = $request['id-jenis-pelayanan'];
+        $rest = JenisPelayanan::find($idJenisPelayanan);
+        $rest = $rest->delete();
+        if($rest)
+        {
+            return json_encode([
+                'status' => 'success',
+                'message' => 'Sukses Menghapus Data !'
+            ]);
+        }
+        else
+        {
+            return json_encode([
+                'status' => 'error',
+                'message' => 'Gagal Menghapus Data !'
+            ]);
+        }
+    }
+
 }

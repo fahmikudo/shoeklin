@@ -64,7 +64,11 @@
                                             </button>
                                         </a>
                                         <a href="#">
-                                            <button class="btn btn-danger" data-toggle="modal" data-target="#confirmDelete">
+                                            <button 
+                                                class="btn btn-danger"
+                                                onclick="deleteModal('{{ $plg->id }}')" 
+                                                data-toggle="modal" 
+                                                data-target="#confirmDelete">
                                                 <i class="fa fa-trash fa-fw"></i>Delete
                                             </button>
                                         </a>
@@ -182,8 +186,9 @@
                                 <p>Are you sure about this ?</p>
                             </div>
                             <div class="modal-footer">
+                                <meta name="csrf-token" content="{{ csrf_token() }}">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-danger" id="confirm">Delete</button>
+                                <button type="button" class="btn btn-danger" data-id="$pelanggan->id" id="confirm">Delete</button>
                             </div>
                             </div>
                         </div>
@@ -194,6 +199,31 @@
     </div>
 </div>
 <script>
+    function deleteModal(idPelanggan) {
+        $('#confirm').on('click', function () {
+            var route = "{{ route('pelanggan-delete') }}";
+            var token = $("meta[name='csrf-token']").attr("content");
+            $.ajax({
+                type: "post",
+                url: route,
+                dataType: "json",
+                data: {
+                    'id-pelanggan': idPelanggan,
+                    '_token': token
+                }
+            })
+            .done(function(data) {
+                if(data.status == "error") return alert("Gagal Menghapus Data !");
+                $("#confirmDelete").children().children().children().children()[4].click()
+                setTimeout(() => {
+                    window.location.reload();
+                }, 500);
+            })
+            .fail(function(e) {
+                console.log('error => '+e.responseJSON.message);
+            })
+        });
+    }
     function editModal(idPelanggan) {
         $.ajax({
             type: "GET",

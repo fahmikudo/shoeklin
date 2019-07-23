@@ -90,20 +90,23 @@ class BarangController extends Controller
 
     public function removeAjax(Request $request)
     {
-        // $idBahanBaku = $request['id-bahan-baku'];
-        return json_encode([
-            'status' => 'success',
-            'message' => 'ahuy'
-        ]);
-        // $rest = BahanBaku::Delete($idBahanBaku);
-        // if($rest)
-        // {
-        //     return redirect(route('barang-index'));
-        // }
-        // else
-        // {
-        //     return redirect(route('errors/404'));
-        // }
+        $idBahanBaku = $request['id-bahan-baku'];
+        $rest = BahanBaku::find($idBahanBaku);
+        $rest = $rest->delete();
+        if($rest)
+        {
+            return json_encode([
+                'status' => 'success',
+                'message' => 'Sukses Menghapus Data !'
+            ]);
+        }
+        else
+        {
+            return json_encode([
+                'status' => 'error',
+                'message' => 'Gagal Menghapus Data !'
+            ]);
+        }
     }
 
     public function search()
@@ -114,28 +117,4 @@ class BarangController extends Controller
             'bahanbaku' => $data
         ]);
     }
-
-
-
-
-
-
-    //
-    // public function index()
-    // {
-    //     $barang = BahanBaku::all();
-    //     return view('barang.index', compact('barang'));
-    // }
-
-    // public function store(Request $request) {
-    //     $data = $request->except('_token');
-        
-    //     $bahanbaku = new BahanBaku;
-    //     $bahanbaku->nama_bahan_baku = $data['nama_barang'];
-    //     $bahanbaku->jumlah_bahan_baku = $data['jumlah_barang'];
-    //     $bahanbaku->jenis_bahan_baku = $data['jenis_barang'];
-    //     $bahanbaku->satuan = $data['satuan'];
-    //     $bahanbaku->save();
-    //     return redirect('barang');
-    // }
 }

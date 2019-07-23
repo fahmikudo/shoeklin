@@ -28,7 +28,7 @@ Route::middleware('auth')->group(function () {
         //crud
         Route::post('/create', 'PegawaiController@store')->name('pegawai-create');
         Route::post('/put', 'PegawaiController@put')->name('pegawai-put');
-        Route::post('/remove', 'PegawaiController@remove')->name('pegawai-remove');
+        Route::post('/remove', 'PegawaiController@removeAjax')->name('pegawai-remove');
     });
     Route::prefix('barang')->group(function () {
         //tampilan
@@ -47,6 +47,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/search','JenisPelayananController@search')->name('jenis-pelayanan-search');
         Route::get('/{idJenisPelayanan}', 'JenisPelayananController@byId')->name('jenis-pelayanan-by-id');
         Route::post('/put', 'JenisPelayananController@update')->name('jenis-pelayanan-update');
+        Route::post('/remove', 'JenisPelayananController@removeAjax')->name('jenis-pelayanan-delete');
     });
 
     Route::prefix('pelanggan')->group(function () {
@@ -56,12 +57,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/search', 'PelangganController@search')->name('pelanggan-search');
         Route::get('/{idPelanggan}','PelangganController@byId')->name('pelanggan-by-id');
         Route::post('/put', 'PelangganController@update')->name('pelanggan-update');
+        Route::post('/remove', 'PelangganController@removeAjax')->name('pelanggan-delete');
     });
-
-    // Route::prefix('pegawai')->group(function () {
-    //     //tampilan
-    //     Route::get('/', 'PegawaiController@index')->name('pegawai-index');
-    // });
 
     Route::prefix('transaksi')->group(function () {
         //tampilan
@@ -76,11 +73,3 @@ Route::middleware('auth')->group(function () {
 
 
 });
-
-// Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');
-// Route::get('/barang', 'BarangController@index')->name('barang-index');
-// Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');
