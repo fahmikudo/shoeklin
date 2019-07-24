@@ -15,8 +15,21 @@
                 </div>
                 <div class="panel-body">
                     <ul class="nav nav-tabs">
-                        <li><a href="{{ url('/transaksi/penyerahan') }}">Penyerahan</a></li>
-                        <li class="active"><a href="{{ url('/transaksi/pengembalian') }}">Pengambilan</a></li>
+                        <li>
+                            <a href="{{ url('/transaksi/penyerahan') }}">
+                                Penyerahan
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url('/transaksi/pengiriman') }}">
+                                Pengiriman
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="{{ url('/transaksi/pengembalian') }}">
+                                Pengambilan
+                            </a>
+                        </li>
                     </ul>
                     <br>
                     <div class="panel-body top-operation">

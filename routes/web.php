@@ -61,9 +61,19 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::prefix('transaksi')->group(function () {
-        //tampilan
+        //penyerahan
         Route::get('/penyerahan', 'PenyerahanController@index')->name('penyerahan-index');
+
+        Route::get('/penyerahan/get', 'PenyerahanController@get')->name('penyerahan-get');
+        Route::get('/pengiriman/dikirim', 'PengirimanController@dikirim')->name('pengiriman-get-dikirim');
+
+        Route::post('/penyerahan/push', 'PenyerahanController@push')->name('penyerahan-push');
+
+        // pengembalian
         Route::get('/pengembalian', 'PengembalianController@index')->name('pengembalian-index');
+
+        Route::get('/pengiriman', 'PengirimanController@index')->name('pengiriman-index');
+
     });
 
     Route::prefix('report')->group(function () {

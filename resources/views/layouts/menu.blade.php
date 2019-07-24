@@ -5,6 +5,9 @@
                 <a href="{{ route('home') }}"><i class="fa fa-users fa-fw"></i> Profile </a>
             </li>
             <li>
+                <a href="{{ route('pegawai-index') }}"><i class="fa fa-bars fa-fw"></i> Pegawai </a>
+            </li>
+            <li>
                 <a href="{{ route('barang-index') }}"><i class="fa fa-bars fa-fw"></i> Barang </a>
             </li>
             <li>
@@ -12,9 +15,6 @@
             </li>
             <li>
                 <a href="{{ route('pelanggan-index') }}"><i class="fa fa-bars fa-fw"></i> Pelanggan </a>
-            </li>
-            <li>
-                <a href="{{ route('pegawai-index') }}"><i class="fa fa-bars fa-fw"></i> Pegawai </a>
             </li>
             <li>
                 <a href="{{ route('penyerahan-index') }}"><i class="fa fa-bars fa-fw"></i> Transaksi </a>
