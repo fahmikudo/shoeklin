@@ -46,52 +46,6 @@
                     </div>
                     <div class="row">
                         <div class="panel-body">
-                            <form action="">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>No. Transaksi</label>
-                                        <input type="text" readonly="true" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Tanggal Masuk</label>
-                                        <input type="date" readonly="true" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Tanggal Keluar</label>
-                                        <input type="date" readonly="true" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="email">Jenis Pelayanan</label>
-                                        <select readonly="true" class="form-control">
-                                            <option value="CUCI">CUCI</option>
-                                            <option value="COLORINg">COLORING</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Tipe Sepatu</label>
-                                        <input readonly="true" type="text" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Jumlah Sepatu</label>
-                                        <input readonly="true" type="text" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Sub Total</label>
-                                        <input readonly="true" type="text" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Total Harga</label>
-                                        <input readonly="true" type="text" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="pull-right">
-                                    <button type="submit" class="btn btn-default">Submit</button>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="panel-body">
                             <div class="table-responsive table-data">
                                 <table class="table table-hover">
                                     <thead>
@@ -108,16 +62,21 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @php $index = 0; @endphp
+                                        @foreach ($transaksi as $trx)
+                                        @php $index += 1 @endphp
                                         <tr>
-                                            <td>1</td>
-                                            <td>TRX-1907110001</td>
-                                            <td>11-07-2019</td>
-                                            <td>12-07-2019</td>
-                                            <td>CUCI</td>
-                                            <td>Boots</td>
-                                            <td>40000</td>
-                                            <td>60000</td>
+                                            <td>{{ $index }}</td>
+                                            <td>{{ $trx->no_transaksi }}</td>
+                                            <td>{{ $trx->tanggal_masuk }}</td>
+                                            <td>{{ $trx->tanggal_selesai }}</td>
+                                            <td>{{ $trx->nama_pelayanan }}</td>
+                                            <td>{{ $trx->tipe_sepatu }}</td>
+                                            <td>{{ $trx->sub_total }}</td>
+                                            <td>{{ $trx->harga_total }}</td>
+                                            <td>{{ $trx->status_pengiriman }}</td>
                                         </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

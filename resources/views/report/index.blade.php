@@ -11,18 +11,13 @@
         <div class="row">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <i class="fa fa-group fa-fw"></i> Buat Laporan
+                    <i class="fa fa-group fa-fw"></i> Buat Laporan Transaksi
                 </div>
                 <div class="panel-body">
-                    <form action="">
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label>Pilih Periode</label>
-                                <input type="date" name="pilih-bulan">
-                            </div>                            
-                        </div>
+                    <form action="{{ route('report-transaksi') }}" method="GET">
+                        @csrf
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Buat Laporan</button>
+                            <button type="submit" class="btn btn-primary">Download Laporan</button>
                         </div>
                     </form>
                 </div>

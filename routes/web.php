@@ -79,6 +79,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix('report')->group(function () {
         //tampilan
         Route::get('/', 'ReportController@index')->name('report-index');
+        Route::get('/LaporanTransaksi', 'ReportController@reportTransaksi')->name('report-transaksi');
     });
 
 
