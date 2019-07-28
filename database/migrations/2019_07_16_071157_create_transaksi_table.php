@@ -22,6 +22,8 @@ class CreateTransaksiTable extends Migration
             $table->string('tipe_sepatu');
             $table->integer('jumlah_sepatu');
             $table->integer('harga_total');
+            $table->string('tipe_pengambilan');
+            $table->string('jarak_pengiriman');
             $table->enum('status_pengiriman', [
                 'BELUM DIKIRIM', 
                 'SUDAH DIKIRIM'

@@ -208,7 +208,7 @@
 
     function getData() {
         var route = '{{ route("penyerahan-get") }}';
-
+        var routeNota = '{{ route("generate-nota") }}'
         $.ajax({
             url: route,
             type: 'GET',
@@ -221,7 +221,7 @@
                 dt += '\
                     <tr>\
                         <td>'+(i + 1)+'</td>\
-                        <td>'+data[i].no_transaksi+'</td>\
+                        <td><a target="_blank" href="' + routeNota + '?id=' + data[i].no_transaksi +'" style="color: blue">'+data[i].no_transaksi+'</a></td>\
                         <td>'+data[i].tanggal_masuk+'</td>\
                         <td>'+data[i].tanggal_selesai+'</td>\
                         <td>'+data[i].nama_pelayanan+'</td>\

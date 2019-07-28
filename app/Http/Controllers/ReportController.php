@@ -13,6 +13,14 @@ class ReportController extends Controller
         return view('report.index');
     }
 
+    public function nota(Request $req) {
+        $data = Transaksi::where('no_transaksi', $req['id'])->get();
+        return view('report.nota',[
+            'transaksi' => $data->first(),
+            'arr' => $data
+        ]);
+    }
+
     public function reportTransaksi()
     {
         $transaksi = Transaksi::GetAll();

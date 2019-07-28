@@ -43,62 +43,37 @@
                                             <th>Tanggal Keluar</th>
                                             <th>Jenis Pelayanan</th>
                                             <th>Tipe Sepatu</th>
-                                            <th>Sub Total</th>
                                             <th>Total Harga</th>
-                                            <th class="text-right"></th>
+                                            <th>Status Pengiriman</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="get-data"></tbody>
+                                    <tbody>
+                                        @php $index = 0; @endphp
+                                        @foreach ($transaksi as $trx)
+                                        @php $index += 1 @endphp
+                                        <tr>
+                                            <td>{{ $index }}</td>
+                                            <td>{{ $trx->no_transaksi }}</td>
+                                            <td>{{ $trx->tanggal_masuk }}</td>
+                                            <td>{{ $trx->tanggal_selesai }}</td>
+                                            <td>{{ $trx->pelayanan()->first()->nama_pelayanan }}</td>
+                                            <td>{{ $trx->tipesepatu()->first()->tipe_sepatu }}</td>
+                                            <td>{{ $trx->harga_total }}</td>
+                                            <td>{{ $trx->status_pengiriman }}</td>
+                                            <td>
+                                                <a href="{{ route('pengembalian-index', ['id_delete' => $trx->id ]) }}" class="btn btn-success">Sudah dikirim</a>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
-                    </div>
-                    <div class="pull-right">
-                        <button type="submit" class="btn btn-primary">Save</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    function getData() {
-        var route = '{{ route("pengiriman-get-dikirim") }}';
-
-        $.ajax({
-            url: route,
-            type: 'GET',
-            dataType: 'json',
-        })
-        .done(function(data) {
-            var dt = '';
-            for (var i = 0; i < data.length; i++) {
-                dt += '\
-                    <tr>\
-                        <td>'+(i + 1)+'</td>\
-                        <td>'+data[i].no_transaksi+'</td>\
-                        <td>'+data[i].tanggal_masuk+'</td>\
-                        <td>'+data[i].tanggal_selesai+'</td>\
-                        <td>'+data[i].nama_pelayanan+'</td>\
-                        <td>'+data[i].tipe_sepatu+'</td>\
-                        <td>'+data[i].sub_total+'</td>\
-                        <td>'+data[i].harga_total+'</td>\
-                    </tr>';
-                data[i]
-            }
-            $('#get-data').html(dt);
-            console.log(data);
-        })
-        .fail(function(e) {
-            console.log("error => " + e.responseJSON.message);
-        })
-        .always(function() {
-            console.log("complete");
-        });
-        
-    }
-    $(document).ready(function() {
-        getData();
-    });
-</script>
 @endsection
