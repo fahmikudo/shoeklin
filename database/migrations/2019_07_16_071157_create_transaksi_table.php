@@ -21,7 +21,6 @@ class CreateTransaksiTable extends Migration
             $table->dateTime('tanggal_selesai');
             $table->string('tipe_sepatu');
             $table->integer('jumlah_sepatu');
-            $table->integer('sub_total');
             $table->integer('harga_total');
             $table->enum('status_pengiriman', [
                 'BELUM DIKIRIM', 

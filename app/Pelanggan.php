@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Pelanggan extends Model
 {
     protected $table = 'pelanggan';
+    protected $attributes = [
+        'jumlah_pencucian' => 0,
+        'status_member' => 'NON MEMBER'
+    ];
+    protected $fillable = ['nama_pelanggan', 'alamat_pelanggan', 'no_telepon', 'status_member', 'jumlah_pencucian'];
 
     public function scopeGet($query)
     {

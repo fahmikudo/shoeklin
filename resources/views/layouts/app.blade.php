@@ -42,6 +42,9 @@
             height: 130px;
             background-size: cover;
         }
+        .removePadding {
+            padding: 0
+        }
     </style>
 
     <script type="text/javascript">

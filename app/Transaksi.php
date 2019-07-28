@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\DB;
 
 class Transaksi extends Model
 {
-    protected $table = 'transaksi';
+	protected $table = 'transaksi';
+	protected $fillable = ['no_transaksi', 'tanggal_masuk', 'tanggal_selesai', 'tipe_sepatu', 'jumlah_sepatu', 'harga_total', 'id_pelanggan', 'id_pelayanan', 'id_pegawai'];
 
     public function pelanggan() {
         return $this->hasMany('App\Pelanggan','id','id_pelangan');
@@ -24,9 +25,8 @@ class Transaksi extends Model
     		'transaksi.no_transaksi',
     		'transaksi.tanggal_masuk',
     		'transaksi.tanggal_selesai',
-    		'transaksi.tipe_sepatu',
+    		'tipe_sepatu.tipe_sepatu',
     		'transaksi.jumlah_sepatu',
-    		'transaksi.sub_total',
     		'transaksi.harga_total',
     		'transaksi.status_pengiriman',
     		'transaksi.id_pelanggan',
@@ -35,7 +35,8 @@ class Transaksi extends Model
     		'jenispelayanan.nama_pelayanan',
     		'jenispelayanan.harga_pelayanan'
     	)
-    	->join('jenispelayanan', 'jenispelayanan.id', '=', 'transaksi.id_pelayanan')
+		->join('jenispelayanan', 'jenispelayanan.id', '=', 'transaksi.id_pelayanan')
+		->join('tipe_sepatu', 'tipe_sepatu.id', '=', 'transaksi.tipe_sepatu')
     	->orderBy('transaksi.id', 'desc')
     	->get();
     }
