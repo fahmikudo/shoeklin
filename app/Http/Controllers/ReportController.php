@@ -21,11 +21,14 @@ class ReportController extends Controller
         ]);
     }
 
-    public function reportTransaksi()
+    public function reportTransaksi(Request $req)
     {
-        $transaksi = Transaksi::GetAll();
-        $pdf = PDF::loadView('report.transaksi', compact('transaksi'));
-        // return $pdf->download('penjualan.pdf');
-        return $pdf->stream();
+        $tanggal_awal = $req['tanggal_awal'];
+        $tanggal_akhir = $req['tanggal_akhir'];
+        $sort_by = 'asc';
+        $transaksi = Transaksi::GetAllForLaporan($tanggal_awal, $tanggal_akhir, $sort_by);
+        $pdf = PDF::loadView('report.transaksi', compact('transaksi'))->setPaper('a4', 'landscape');
+        return $pdf->download('penjualan.pdf');
+        // return $pdf->stream();
     }
 }

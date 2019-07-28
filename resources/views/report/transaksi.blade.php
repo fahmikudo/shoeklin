@@ -153,8 +153,8 @@
                         <th>Tanggal Masuk</th>
                         <th>Tanggal Keluar</th>
                         <th>Jenis Pelayanan</th>
+                        <th>Nama Pelanggan</th>
                         <th>Tipe Sepatu</th>
-                        <th>Sub Total</th>
                         <th>Total Harga</th>
                         <th>Status Pengiriman</th>    
                     </tr>
@@ -169,8 +169,8 @@
                         <td>{{ $trx->tanggal_masuk }}</td>
                         <td>{{ $trx->tanggal_selesai }}</td>
                         <td>{{ $trx->nama_pelayanan }}</td>
+                        <td>{{ $trx->nama_pelanggan }}</td>
                         <td>{{ $trx->tipe_sepatu }}</td>
-                        <td>{{ $trx->sub_total }}</td>
                         <td>{{ $trx->harga_total }}</td>
                         <td>{{ $trx->status_pengiriman }}</td>
                     </tr>
