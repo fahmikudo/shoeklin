@@ -9,7 +9,7 @@ class PengirimanController extends Controller
 {
     public function index()
     {
-        $data = Transaksi::where('status_pengiriman','BELUM DIKIRIM')->get();
+        $data = Transaksi::where('status_pengiriman','BELUM DIKIRIM')->where('tipe_pengambilan','diantar')->get();
     	return view('transaksi.pengiriman', [
             'transaksi' => $data
         ]);

@@ -133,6 +133,7 @@
                                             <tr>
                                                 <td>
                                                     <select 
+                                                        id="jenis_pelayanan"
                                                         required
                                                         name="jenis_pelayanan[]"
                                                         class="form-control">
@@ -146,6 +147,7 @@
                                                 </td>
                                                 <td>
                                                     <select 
+                                                        id="tipe_sepatu"
                                                         required
                                                         name="tipe_sepatu[]"
                                                         class="form-control">
@@ -269,7 +271,11 @@
             parent.remove();
             hitungSemua()
         })
-        
+
+        $(document).on('change', '#jenis_pelayanan', (e) => hitungSemua() )
+
+        $(document).on('change', '#tipe_sepatu', (e) => hitungSemua() )
+
         $(document).on('input', '#jumlah_sepatu', (e) => hitungSemua() )
 
         $(document).on('input', 'input[name="jarak_pengiriman"]', (e) => hitungSemua() )
@@ -369,7 +375,19 @@
             .done(function(data) {
                 if (data.status === 'success') {
                     // call function get
+                    $('input[name="tanggal_keluar"]').val("")
+                    $('input[name="jarak_pengiriman"]').val("")
+                    $('input[name="jarak_pengiriman"]').attr('readonly', true)
+                    $('select[name="tipe_pengambilan"]').val("")
+                    $('select[name="pilih_pelanggan"]').val("")
+                    $('#table-cart').find('tbody').html('')
+                    $('#table-cart').find('tbody').append(input)
+                    $('input[name="input_pelanggan[nama]"]').val('');
+                    $('input[name="input_pelanggan[alamat]"]').val('');
+                    $('input[name="input_pelanggan[no_telepon]"]').val('');
+                    hitungSemua()
                     getData();
+                    swal("Informasi", "Data berhasil Disimpan!", "success");
                 } else {
                     alert(data.message);
                 }

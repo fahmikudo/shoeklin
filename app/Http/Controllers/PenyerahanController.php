@@ -8,6 +8,7 @@ use App\JenisPelayanan;
 use App\Pelanggan;
 use App\TipeSepatu;
 use Carbon;
+use App\Settings;
 // use App\Pegawai;
 
 use Auth;
@@ -37,6 +38,9 @@ class PenyerahanController extends Controller
     public function push(Request $req)
     {
 		$id = 0;
+		$promo = Settings::where('key', 'promo')->first();
+		$promo = $promo->value;
+		
 		// buat pelanggan baru
 		if ($req['input_pelanggan']['nama'] != null) {
 			try {
@@ -67,7 +71,7 @@ class PenyerahanController extends Controller
 			$jumlah_sepatu = $req['jumlah_sepatu'][$index];
 			$tipe_pengambilan = $req['tipe_pengambilan'];
 			$jarak_pengiriman = $req['jarak_pengiriman'] ? $req['jarak_pengiriman'] : 0;
-			$total_harga = $cekJumlahTransaksi == 10 && $cekStatusMemberPelanggan == "MEMBER" ? 0 : $req['total_harga'];
+			$total_harga = $cekJumlahTransaksi == $promo && $cekStatusMemberPelanggan == "MEMBER" ? 0 : $req['total_harga'];
 
 			$data = [
 				'no_transaksi' => $no_transaksi,

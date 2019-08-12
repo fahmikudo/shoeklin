@@ -19,8 +19,9 @@
     border-top: 2px solid;
 }
 @media print {
-  @page { margin: 0; }
+  @page { margin: 0; size: 210mm 140mm; }
   body { margin: 0.6cm; }
+  
 }
 </style>
 
@@ -28,11 +29,17 @@
     <div class="row">
         <div class="col-xs-12">
     		<div class="invoice-title">
-    			<h2>Shoeklin</h2><h3 class="pull-right">Invoice</h3>
+                <img width="100" src="{{ asset('img/logo.jpeg') }}" />
+                <h2>Shoeklin</h2>
+                <h3 class="pull-right">Invoice</h3>
     		</div>
     		<hr>
     		<div class="row">
     			<div class="col-xs-6">
+                    <address>
+                    <strong>Kasir:</strong><br>
+                        {{ Auth::user()->name }}
+                    </address>
     				<address>
     				<strong>Customer:</strong><br>
     					{{ $transaksi->pelanggan()->first()->nama_pelanggan }}<br>
@@ -110,18 +117,6 @@
     			</div>
     		</div>
     	</div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <p><strong>Keterangan:</strong><br>
-                    1. Pengambilan cucian harus membawa nota<br>
-                    2. Cucian luntur bukan tanggung lawab kami<br>
-                    3. Hitung dan periksa sebelum pergi<br>
-                    4. Klaim kekurangan/kehilangan cuclan setelah meninggalkan laundry tidak dilayani<br>
-                    5. Cucian yang rusak/mengkerut karena sifat kain tidak dapat kami ganti<br>
-                    6. Cucian yang tidak diambil lebih dari 1 bulan bukan tanggung jawab kami<br>
-                    7. Maksimal penggantian 10x dan total invoice dan barang menjadi milik kami</p>
-        </div>
     </div>
 </div>
 

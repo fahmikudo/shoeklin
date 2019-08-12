@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Transaksi;
 use PDF;
+use Carbon;
 
 class ReportController extends Controller
 {
@@ -28,7 +29,20 @@ class ReportController extends Controller
         $sort_by = 'asc';
         $transaksi = Transaksi::GetAllForLaporan($tanggal_awal, $tanggal_akhir, $sort_by);
         $pdf = PDF::loadView('report.transaksi', compact('transaksi'))->setPaper('a4', 'landscape');
-        return $pdf->download('penjualan.pdf');
+        $title = 'Shoeklin_Report_' . strtotime(Carbon::now()) . '.pdf';
+        
+        return $pdf->download($title);
         // return $pdf->stream();
+    }
+
+    public function reportPreview(Request $req)
+    {
+        $tanggal_awal = $req['tanggal_awal'];
+        $tanggal_akhir = $req['tanggal_akhir'];
+        $sort_by = 'asc';
+        $transaksi = Transaksi::GetAllForLaporan($tanggal_awal, $tanggal_akhir, $sort_by);
+        $pdf = PDF::loadView('report.transaksi', compact('transaksi'))->setPaper('a4', 'landscape');
+        // return $pdf->download('penjualan.pdf');
+        return $pdf->stream();
     }
 }

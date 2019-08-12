@@ -75,6 +75,7 @@
                                             <td>{{ $trx->harga_total }}</td>
                                             <td>{{ $trx->status_pengiriman }}</td>
                                             <td>
+                                                <input type="checkbox" name="luntur"> Luntur
                                                 <a href="{{ route('pengembalian-index', ['id_delete' => $trx->id ]) }}" class="btn btn-success">Sudah diambil</a>
                                             </td>
                                         </tr>

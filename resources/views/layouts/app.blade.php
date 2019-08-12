@@ -15,7 +15,8 @@
 	{{-- <script src="{{ asset('js/jquery.cookie.js') }}"></script> --}}
 	<script src="{{ asset('js/bootstrap.min.js') }}"></script>
 	<script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
-	<script src="{{ asset('js/metisMenu.min.js') }}"></script>
+    <script src="{{ asset('js/metisMenu.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 	{{-- <script src="{{ asset('js/sb-admin-2.js')}}"></script> --}}
 
     <!-- Fonts -->

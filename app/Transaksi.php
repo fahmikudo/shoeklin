@@ -37,7 +37,8 @@ class Transaksi extends Model
     	)
 		->join('jenispelayanan', 'jenispelayanan.id', '=', 'transaksi.id_pelayanan')
 		->join('tipe_sepatu', 'tipe_sepatu.id', '=', 'transaksi.tipe_sepatu')
-    	->orderBy('transaksi.id', 'desc')
+		->orderBy('transaksi.id', 'desc')
+		->groupBy('transaksi.no_transaksi')
     	->get();
     }
 

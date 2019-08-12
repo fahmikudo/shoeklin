@@ -30,6 +30,11 @@
                 <a href="{{ route('report-index') }}"><i class="fa fa-bars fa-fw"></i> Report </a>
             </li>
             @endif
+            @if (Auth::user()->jabatan == 'ADMIN')
+            <li>
+                <a href="{{ route('settings-index') }}"><i class="fa fa-bars fa-fw"></i> Pengaturan </a>
+            </li>
+            @endif
         </ul>
     </div>
 </div>

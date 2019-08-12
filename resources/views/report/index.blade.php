@@ -23,7 +23,6 @@
                                         name="tanggal_awal" 
                                         id="tanggal_awal" 
                                         class="form-control form-control-alternative{{ $errors->has('tanggal_awal') ? ' is-invalid' : '' }}" 
-                                        placeholder="{{ __('Nama barang') }}"  
                                         required 
                                         autofocus>
                                         @if ($errors->has('tanggal_awal'))
@@ -47,7 +46,6 @@
                                         name="tanggal_akhir" 
                                         id="tanggal_akhir" 
                                         class="form-control form-control-alternative{{ $errors->has('tanggal_akhir') ? ' is-invalid' : '' }}" 
-                                        placeholder="{{ __('Nama barang') }}"  
                                         required 
                                         autofocus>
                                         @if ($errors->has('tanggal_akhir'))
@@ -65,6 +63,7 @@
                                 </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary">Download Laporan</button>
+                            <button data-baseUrl="{{ route('report-preview') }}" type="submit" id="btnPreview" class="btn btn-info">Preview Laporan</button>
                         </div>
                     </form>
                 </div>
@@ -72,4 +71,15 @@
         </div>
     </div>
 </div>
+<script>
+    $(function() {
+        $('#btnPreview').on('click', function(e) {
+            e.preventDefault();
+            let tanggal_awal = $('input[name="tanggal_awal"]').val()
+            let tanggal_akhir = $('input[name="tanggal_akhir"]').val()
+            let baseUrl = $(this).attr('data-baseUrl')
+            window.open(baseUrl + '?tanggal_awal=' + tanggal_awal + '&tanggal_akhir=' + tanggal_akhir)
+        })
+    })
+</script>
 @endsection
