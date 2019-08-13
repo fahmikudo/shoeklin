@@ -6,12 +6,22 @@ use Illuminate\Http\Request;
 use App\Transaksi;
 use PDF;
 use Carbon;
+use App\JenisPelayanan;
 
 class ReportController extends Controller
 {
     public function index()
     {
-        return view('report.index');
+        $jenpel = JenisPelayanan::all();
+        $selectJenpel = [
+            "all" => "Semua" 
+        ];
+        foreach ($jenpel as $data) {
+            $selectJenpel[$data->id] = $data->nama_pelayanan;
+        }
+        return view('report.index',[
+            'jenpel' => $selectJenpel
+        ]);
     }
 
     public function nota(Request $req) {
@@ -27,7 +37,8 @@ class ReportController extends Controller
         $tanggal_awal = $req['tanggal_awal'];
         $tanggal_akhir = $req['tanggal_akhir'];
         $sort_by = 'asc';
-        $transaksi = Transaksi::GetAllForLaporan($tanggal_awal, $tanggal_akhir, $sort_by);
+        $anotherWhere = $req['jenis_pelayanan'] == "all" ? "" : $req['jenis_pelayanan'];
+        $transaksi = Transaksi::GetAllForLaporan($tanggal_awal, $tanggal_akhir, $sort_by, $anotherWhere);
         $pdf = PDF::loadView('report.transaksi', compact('transaksi'))->setPaper('a4', 'landscape');
         $title = 'Shoeklin_Report_' . strtotime(Carbon::now()) . '.pdf';
         
@@ -40,7 +51,8 @@ class ReportController extends Controller
         $tanggal_awal = $req['tanggal_awal'];
         $tanggal_akhir = $req['tanggal_akhir'];
         $sort_by = 'asc';
-        $transaksi = Transaksi::GetAllForLaporan($tanggal_awal, $tanggal_akhir, $sort_by);
+        $anotherWhere = $req['jenis_pelayanan'] == "all" ? "" : $req['jenis_pelayanan'];
+        $transaksi = Transaksi::GetAllForLaporan($tanggal_awal, $tanggal_akhir, $sort_by, $anotherWhere);
         $pdf = PDF::loadView('report.transaksi', compact('transaksi'))->setPaper('a4', 'landscape');
         // return $pdf->download('penjualan.pdf');
         return $pdf->stream();

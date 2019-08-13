@@ -22,10 +22,12 @@ class PenyerahanController extends Controller
         $jenis_pelayanan = JenisPelayanan::Get();
 		$pilih_pelanggan = Pelanggan::Get();
 		$tipe_sepatu = TipeSepatu::all();
+		$settings = Settings::all();
         $pilih_pegawai = [];
         return view(
         	'transaksi.index',
         	[
+				'settings' => $settings,
         		'jenis_pelayanan' => $jenis_pelayanan,
         		'pilih_pelanggan' => $pilih_pelanggan,
 				'pilih_pegawai' => $pilih_pegawai,

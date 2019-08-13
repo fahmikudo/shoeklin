@@ -28,6 +28,18 @@
                     </div>
                     <div class="col-lg-12">
                         <div class="form-group">
+                            <label for="">Ongkos Kirim: 10 Km Pertama</label>
+                            <input type="text" name="ongkos_10kmpertama" class="form-control" value="{{ $settings[1]->value }}">
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="">Ongkos Kirim: 10 Km Selanjutnya</label>
+                            <input type="text" name="ongkos_10kmselanjutnya" class="form-control" value="{{ $settings[2]->value }}">
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
                             <input type="submit" value="Simpan" class="btn btn-success">
                         </div>
                     </div>

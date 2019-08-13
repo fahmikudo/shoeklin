@@ -32,6 +32,8 @@
                         </li>
                     </ul>
                     <div class="row">
+                        {{ Form::hidden('10kmpertama', $settings[1]->value) }}
+                        {{ Form::hidden('10kmselanjutnya', $settings[2]->value) }}
                         {{ Form::open(array('id' => 'form-transaction')) }}
                             <div class="panel-body">  
                                 <div class="form-group col-md-6">
@@ -126,6 +128,7 @@
                                                 <th>Jenis Pelayanan</th>
                                                 <th>Tipe Sepatu</th>
                                                 <th>Jumlah Sepatu</th>
+                                                <th>Satuan</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -168,6 +171,9 @@
                                                         placeholder="0"
                                                         min="0" 
                                                         class="form-control" />
+                                                </td>
+                                                <td>
+                                                Satu Pasang
                                                 </td>
                                                 <td>
                                                     <button id="hapus_sepatu" class="btn btn-danger">x</button>
@@ -305,13 +311,15 @@
             
             let jarak_pengiriman = $('input[name="jarak_pengiriman"]').val()
             jarak_pengiriman = Number(jarak_pengiriman);
+            let first = Number($('input[name="10kmpertama"]').val())
+            let second = Number($('input[name="10kmselanjutnya"]').val()) / 10
             if(jarak_pengiriman > 0) {
                 if(jarak_pengiriman <= 10) {
-                    total += 15000
+                    total += first
                 } else {
-                    total += 15000
+                    total += first
                     jarak_pengiriman = jarak_pengiriman - 10;
-                    total += pembulatan(jarak_pengiriman) * 1000;
+                    total += pembulatan(jarak_pengiriman) * second;
                 }
             }
             total_harga.val(total ? total : 0);

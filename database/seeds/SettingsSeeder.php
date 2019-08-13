@@ -16,5 +16,15 @@ class SettingsSeeder extends Seeder
             'key' => 'promo',
             'value'=> 10
         ]);
+
+        Settings::create([
+            'key' => 'ongkos_10kmpertama',
+            'value'=> 15000
+        ]);
+
+        Settings::create([
+            'key' => 'ongkos_10kmselanjutnya',
+            'value'=> 10000
+        ]);
     }
 }
