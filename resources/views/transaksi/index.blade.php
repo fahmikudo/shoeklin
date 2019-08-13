@@ -129,6 +129,7 @@
                                                 <th>Tipe Sepatu</th>
                                                 <th>Jumlah Sepatu</th>
                                                 <th>Satuan</th>
+                                                <th>Keterangan</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -174,6 +175,9 @@
                                                 </td>
                                                 <td>
                                                 Satu Pasang
+                                                </td>
+                                                <td>
+                                                    <input type="checkbox" name="luntur"> Luntur
                                                 </td>
                                                 <td>
                                                     <button id="hapus_sepatu" class="btn btn-danger">x</button>
