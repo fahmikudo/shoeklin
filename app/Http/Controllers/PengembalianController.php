@@ -17,7 +17,10 @@ class PengembalianController extends Controller
             return back();
         }
         if ($req['keyword']) {
-            $data = Transaksi::where('no_transaksi',$req['keyword'])->where('status_pengiriman','BELUM DIKIRIM')->get();
+            $data = Transaksi::where('no_transaksi',$req['keyword'])
+            ->where('status_pengiriman','BELUM DIKIRIM')
+            ->where('tipe_pengambilan','diambil')
+            ->get();
         } else {
             $data = [];
         }

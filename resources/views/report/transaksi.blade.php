@@ -160,9 +160,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @php $index = 0; @endphp
+                    @php $index = 0; $total_trx = 0; @endphp
                     @foreach ($transaksi as $trx)
-                    @php $index += 1 @endphp
+                    @php $index += 1; $total_trx += $trx->harga_total; @endphp
                     <tr>
                         <td>{{ $index }}</td>
                         <td>{{ $trx->no_transaksi }}</td>
@@ -175,6 +175,14 @@
                         <td>{{ $trx->status_pengiriman }}</td>
                     </tr>
                     @endforeach
+                    <tr>
+                        <td colspan="8" align="right">Total Transaksi</td>
+                        <td>{{ count($transaksi) . ' Transaksi' }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="8" align="right">Total Pendapatan</td>
+                        <td>Rp. {{ $total_trx }}</td>
+                    </tr>
                 </tbody>                
             </table>
         </div>

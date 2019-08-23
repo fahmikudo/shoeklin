@@ -23,7 +23,6 @@
                                         name="tanggal_awal" 
                                         id="tanggal_awal" 
                                         class="form-control form-control-alternative{{ $errors->has('tanggal_awal') ? ' is-invalid' : '' }}" 
-                                        placeholder="{{ __('Nama barang') }}"  
                                         required 
                                         autofocus>
                                         @if ($errors->has('tanggal_awal'))
@@ -32,7 +31,6 @@
                                             </span>
                                         @endif
                                         
-                                    </select>
                                         @if ($errors->has('tanggal_awal'))
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $errors->first('tanggal_awal') }}</strong>
@@ -47,7 +45,6 @@
                                         name="tanggal_akhir" 
                                         id="tanggal_akhir" 
                                         class="form-control form-control-alternative{{ $errors->has('tanggal_akhir') ? ' is-invalid' : '' }}" 
-                                        placeholder="{{ __('Nama barang') }}"  
                                         required 
                                         autofocus>
                                         @if ($errors->has('tanggal_akhir'))
@@ -56,15 +53,17 @@
                                             </span>
                                         @endif
                                         
-                                    </select>
                                         @if ($errors->has('tanggal_akhir'))
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $errors->first('tanggal_akhir') }}</strong>
                                             </span>
                                         @endif
                                 </div>
+                                {{ Form::label('jenis_pelayanan', 'Jenis Pelayanan*') }}
+                                {{ Form::select('jenis_pelayanan', $jenpel, '',['class' => 'form-control']) }}
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary">Download Laporan</button>
+                            <button data-baseUrl="{{ route('report-preview') }}" type="submit" id="btnPreview" class="btn btn-info">Preview Laporan</button>
                         </div>
                     </form>
                 </div>
@@ -72,4 +71,16 @@
         </div>
     </div>
 </div>
+<script>
+    $(function() {
+        $('#btnPreview').on('click', function(e) {
+            e.preventDefault();
+            let tanggal_awal = $('input[name="tanggal_awal"]').val()
+            let tanggal_akhir = $('input[name="tanggal_akhir"]').val()
+            let jenis_pelayanan = $('select[name="jenis_pelayanan"]').val()
+            let baseUrl = $(this).attr('data-baseUrl')
+            window.open(baseUrl + '?tanggal_awal=' + tanggal_awal + '&tanggal_akhir=' + tanggal_akhir + '&jenis_pelayanan=' + jenis_pelayanan)
+        })
+    })
+</script>
 @endsection

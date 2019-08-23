@@ -81,7 +81,14 @@ Route::middleware('auth')->group(function () {
         Route::get('/', 'ReportController@index')->name('report-index');
         Route::get('/nota', 'ReportController@nota')->name('generate-nota');
         Route::get('/LaporanTransaksi', 'ReportController@reportTransaksi')->name('report-transaksi');
+        Route::get('/previewLaporanTransaksi', 'ReportController@reportPreview')->name('report-preview');
     });
 
-
+    Route::prefix('settings')->group(function () {
+        //tampilan
+        Route::get('/', 'SettingsController@index')->name('settings-index');
+        Route::post('/', 'SettingsController@save')->name('settings-save');
+        // Route::get('/nota', 'ReportController@nota')->name('generate-nota');
+        // Route::get('/LaporanTransaksi', 'ReportController@reportTransaksi')->name('report-transaksi');
+    });
 });

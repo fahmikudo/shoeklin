@@ -32,6 +32,8 @@
                         </li>
                     </ul>
                     <div class="row">
+                        {{ Form::hidden('10kmpertama', $settings[1]->value) }}
+                        {{ Form::hidden('10kmselanjutnya', $settings[2]->value) }}
                         {{ Form::open(array('id' => 'form-transaction')) }}
                             <div class="panel-body">  
                                 <div class="form-group col-md-6">
@@ -126,6 +128,8 @@
                                                 <th>Jenis Pelayanan</th>
                                                 <th>Tipe Sepatu</th>
                                                 <th>Jumlah Sepatu</th>
+                                                <th>Satuan</th>
+                                                <th>Keterangan</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -133,6 +137,7 @@
                                             <tr>
                                                 <td>
                                                     <select 
+                                                        id="jenis_pelayanan"
                                                         required
                                                         name="jenis_pelayanan[]"
                                                         class="form-control">
@@ -146,6 +151,7 @@
                                                 </td>
                                                 <td>
                                                     <select 
+                                                        id="tipe_sepatu"
                                                         required
                                                         name="tipe_sepatu[]"
                                                         class="form-control">
@@ -166,6 +172,12 @@
                                                         placeholder="0"
                                                         min="0" 
                                                         class="form-control" />
+                                                </td>
+                                                <td>
+                                                Satu Pasang
+                                                </td>
+                                                <td>
+                                                    <input type="checkbox" name="luntur"> Luntur
                                                 </td>
                                                 <td>
                                                     <button id="hapus_sepatu" class="btn btn-danger">x</button>
@@ -269,7 +281,11 @@
             parent.remove();
             hitungSemua()
         })
-        
+
+        $(document).on('change', '#jenis_pelayanan', (e) => hitungSemua() )
+
+        $(document).on('change', '#tipe_sepatu', (e) => hitungSemua() )
+
         $(document).on('input', '#jumlah_sepatu', (e) => hitungSemua() )
 
         $(document).on('input', 'input[name="jarak_pengiriman"]', (e) => hitungSemua() )
@@ -299,13 +315,15 @@
             
             let jarak_pengiriman = $('input[name="jarak_pengiriman"]').val()
             jarak_pengiriman = Number(jarak_pengiriman);
+            let first = Number($('input[name="10kmpertama"]').val())
+            let second = Number($('input[name="10kmselanjutnya"]').val()) / 10
             if(jarak_pengiriman > 0) {
                 if(jarak_pengiriman <= 10) {
-                    total += 15000
+                    total += first
                 } else {
-                    total += 15000
+                    total += first
                     jarak_pengiriman = jarak_pengiriman - 10;
-                    total += pembulatan(jarak_pengiriman) * 1000;
+                    total += pembulatan(jarak_pengiriman) * second;
                 }
             }
             total_harga.val(total ? total : 0);
@@ -369,7 +387,19 @@
             .done(function(data) {
                 if (data.status === 'success') {
                     // call function get
+                    $('input[name="tanggal_keluar"]').val("")
+                    $('input[name="jarak_pengiriman"]').val("")
+                    $('input[name="jarak_pengiriman"]').attr('readonly', true)
+                    $('select[name="tipe_pengambilan"]').val("")
+                    $('select[name="pilih_pelanggan"]').val("")
+                    $('#table-cart').find('tbody').html('')
+                    $('#table-cart').find('tbody').append(input)
+                    $('input[name="input_pelanggan[nama]"]').val('');
+                    $('input[name="input_pelanggan[alamat]"]').val('');
+                    $('input[name="input_pelanggan[no_telepon]"]').val('');
+                    hitungSemua()
                     getData();
+                    swal("Informasi", "Data berhasil Disimpan!", "success");
                 } else {
                     alert(data.message);
                 }

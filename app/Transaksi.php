@@ -37,7 +37,8 @@ class Transaksi extends Model
     	)
 		->join('jenispelayanan', 'jenispelayanan.id', '=', 'transaksi.id_pelayanan')
 		->join('tipe_sepatu', 'tipe_sepatu.id', '=', 'transaksi.tipe_sepatu')
-    	->orderBy('transaksi.id', 'desc')
+		->orderBy('transaksi.id', 'desc')
+		->groupBy('transaksi.no_transaksi')
     	->get();
     }
 
@@ -76,29 +77,58 @@ class Transaksi extends Model
 		return $this->hasOne('App\TipeSepatu','id','tipe_sepatu');
 	}
 
-	public function scopeGetAllForLaporan($query, $tglAwal, $tglAkhir, $order) {
-    	return DB::table($this->table)
-    	->select(
-    		'transaksi.id',
-    		'transaksi.no_transaksi',
-    		'transaksi.tanggal_masuk',
-    		'transaksi.tanggal_selesai',
-    		'tipe_sepatu.tipe_sepatu',
-    		'transaksi.jumlah_sepatu',
-    		'transaksi.harga_total',
-    		'transaksi.status_pengiriman',
-    		'transaksi.id_pelanggan',
-    		'transaksi.id_pelayanan',
-			'transaksi.id_pegawai',
-			'pelanggan.nama_pelanggan',
-    		'jenispelayanan.nama_pelayanan',
-    		'jenispelayanan.harga_pelayanan'
-		)
-		->join('pelanggan', 'pelanggan.id', '=', 'transaksi.id_pelanggan')
-		->join('jenispelayanan', 'jenispelayanan.id', '=', 'transaksi.id_pelayanan')
-		->join('tipe_sepatu', 'tipe_sepatu.id', '=', 'transaksi.tipe_sepatu')
-		->whereBetween('transaksi.created_at', [$tglAwal, $tglAkhir])
-    	->orderBy('transaksi.id', $order)
-    	->get();
+	public function scopeGetAllForLaporan($query, $tglAwal, $tglAkhir, $sort, $anotherWhere) {
+		if ($anotherWhere == "") {
+			return DB::table($this->table)
+			->select(
+				'transaksi.id',
+				'transaksi.no_transaksi',
+				'transaksi.tanggal_masuk',
+				'transaksi.tanggal_selesai',
+				'tipe_sepatu.tipe_sepatu',
+				'transaksi.jumlah_sepatu',
+				'transaksi.harga_total',
+				'transaksi.status_pengiriman',
+				'transaksi.id_pelanggan',
+				'transaksi.id_pelayanan',
+				'transaksi.id_pegawai',
+				'pelanggan.nama_pelanggan',
+				'jenispelayanan.nama_pelayanan',
+				'jenispelayanan.harga_pelayanan'
+			)
+			->join('pelanggan', 'pelanggan.id', '=', 'transaksi.id_pelanggan')
+			->join('jenispelayanan', 'jenispelayanan.id', '=', 'transaksi.id_pelayanan')
+			->join('tipe_sepatu', 'tipe_sepatu.id', '=', 'transaksi.tipe_sepatu')
+			->whereBetween('transaksi.created_at', [$tglAwal, $tglAkhir])
+			->where('status_pengiriman','SUDAH DIKIRIM')
+			->orderBy('transaksi.id', $sort)
+			->get();
+		} else {
+			return DB::table($this->table)
+			->select(
+				'transaksi.id',
+				'transaksi.no_transaksi',
+				'transaksi.tanggal_masuk',
+				'transaksi.tanggal_selesai',
+				'tipe_sepatu.tipe_sepatu',
+				'transaksi.jumlah_sepatu',
+				'transaksi.harga_total',
+				'transaksi.status_pengiriman',
+				'transaksi.id_pelanggan',
+				'transaksi.id_pelayanan',
+				'transaksi.id_pegawai',
+				'pelanggan.nama_pelanggan',
+				'jenispelayanan.nama_pelayanan',
+				'jenispelayanan.harga_pelayanan'
+			)
+			->join('pelanggan', 'pelanggan.id', '=', 'transaksi.id_pelanggan')
+			->join('jenispelayanan', 'jenispelayanan.id', '=', 'transaksi.id_pelayanan')
+			->join('tipe_sepatu', 'tipe_sepatu.id', '=', 'transaksi.tipe_sepatu')
+			->whereBetween('transaksi.created_at', [$tglAwal, $tglAkhir])
+			->where('id_pelayanan', $anotherWhere)
+			->where('status_pengiriman','SUDAH DIKIRIM')
+			->orderBy('transaksi.id', $sort)
+			->get();
+		}
     }
 }
