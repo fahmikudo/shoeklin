@@ -35,22 +35,22 @@
                         {{ Form::hidden('10kmpertama', $settings[1]->value) }}
                         {{ Form::hidden('10kmselanjutnya', $settings[2]->value) }}
                         {{ Form::open(array('id' => 'form-transaction')) }}
-                            <div class="panel-body">  
+                            <div class="panel-body">
                                 <div class="form-group col-md-6">
                                     <label>Tanggal Masuk</label>
-                                    <input 
+                                    <input
                                         name="tanggal_masuk"
                                         readonly
                                         value="{{ date('m-d-Y') }}"
-                                        type="text" 
+                                        type="text"
                                         class="form-control">
                                 </div>
 
                                 <div class="form-group col-md-6">
                                     <label>Tanggal Keluar</label>
-                                    <input 
-                                        name="tanggal_keluar" 
-                                        type="date" 
+                                    <input
+                                        name="tanggal_keluar"
+                                        type="date"
                                         required
                                         class="form-control">
                                 </div>
@@ -103,20 +103,20 @@
                                     <div class="input-group">
                                         <input
                                             readonly
-                                            name="jarak_pengiriman" 
-                                            type="text" 
+                                            name="jarak_pengiriman"
+                                            type="text"
                                             class="form-control">
                                         <div class="input-group-addon">km</div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="form-group col-md-6">
                                     <label>Total Harga</label>
-                                    <input 
+                                    <input
                                         readonly
                                         value="0"
-                                        name="total_harga" 
-                                        type="text" 
+                                        name="total_harga"
+                                        type="text"
                                         class="form-control">
                                 </div>
 
@@ -136,7 +136,7 @@
                                         <tbody>
                                             <tr>
                                                 <td>
-                                                    <select 
+                                                    <select
                                                         id="jenis_pelayanan"
                                                         required
                                                         name="jenis_pelayanan[]"
@@ -150,7 +150,7 @@
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <select 
+                                                    <select
                                                         id="tipe_sepatu"
                                                         required
                                                         name="tipe_sepatu[]"
@@ -164,13 +164,13 @@
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <input 
+                                                    <input
                                                         required
-                                                        name="jumlah_sepatu[]" 
-                                                        type="number" 
+                                                        name="jumlah_sepatu[]"
+                                                        type="number"
                                                         id="jumlah_sepatu"
                                                         placeholder="0"
-                                                        min="0" 
+                                                        min="0"
                                                         class="form-control" />
                                                 </td>
                                                 <td>
@@ -252,7 +252,7 @@
         .always(function() {
             console.log("complete");
         });
-        
+
     }
     $(document).ready(function() {
         $('select[name="tipe_pengambilan"]').on("change", function(e) {
@@ -312,7 +312,7 @@
                 jumlah = Number(jumlah) * Number(harga)
                 total += jumlah;
             }
-            
+
             let jarak_pengiriman = $('input[name="jarak_pengiriman"]').val()
             jarak_pengiriman = Number(jarak_pengiriman);
             let first = Number($('input[name="10kmpertama"]').val())

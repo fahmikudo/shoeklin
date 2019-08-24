@@ -68,7 +68,7 @@ class Transaksi extends Model
     public function scopeSimpan($query, $data) {
     	return DB::table($this->table)->insert($data);
 	}
-	
+
 	public function pelayanan() {
 		return $this->hasOne('App\JenisPelayanan','id','id_pelayanan');
 	}

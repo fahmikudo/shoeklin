@@ -11,7 +11,7 @@
             @endif
             @if (Auth::user()->jabatan == 'ADMIN')
             <li>
-                <a href="{{ route('barang-index') }}"><i class="fa fa-bars fa-fw"></i> Barang </a>
+                <a href="{{ route('barang-index') }}"><i class="fa fa-bars fa-fw"></i> Bahan Baku </a>
             </li>
             @endif
             @if (Auth::user()->jabatan == 'ADMIN')

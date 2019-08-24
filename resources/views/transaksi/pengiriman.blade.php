@@ -44,6 +44,7 @@
                                             <th>Jenis Pelayanan</th>
                                             <th>Tipe Sepatu</th>
                                             <th>Total Harga</th>
+                                            <th>Nama Pengirim</th>
                                             <th>Status Pengiriman</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -60,6 +61,7 @@
                                             <td>{{ $trx->pelayanan()->first()->nama_pelayanan }}</td>
                                             <td>{{ $trx->tipesepatu()->first()->tipe_sepatu }}</td>
                                             <td>{{ $trx->harga_total }}</td>
+                                            <td>{{ Auth::user()->name }}</td>
                                             <td>{{ $trx->status_pengiriman }}</td>
                                             <td>
                                                 <a href="{{ route('pengembalian-index', ['id_delete' => $trx->id ]) }}" class="btn btn-success">Sudah dikirim</a>

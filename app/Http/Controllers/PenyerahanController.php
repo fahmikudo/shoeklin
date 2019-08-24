@@ -42,7 +42,7 @@ class PenyerahanController extends Controller
 		$id = 0;
 		$promo = Settings::where('key', 'promo')->first();
 		$promo = $promo->value;
-		
+
 		// buat pelanggan baru
 		if ($req['input_pelanggan']['nama'] != null) {
 			try {
@@ -62,7 +62,7 @@ class PenyerahanController extends Controller
 		$cekJumlahTransaksi = Transaksi::where('id_pelanggan', $pelanggan)->groupBy('no_transaksi')->get();
 		$cekStatusMemberPelanggan = Pelanggan::find($pelanggan);
 		$cekStatusMemberPelanggan = $cekStatusMemberPelanggan->status_member;
-		$cekJumlahTransaksi = count($cekJumlahTransaksi);
+        $cekJumlahTransaksi = count($cekJumlahTransaksi);
 
 		foreach ($req['jenis_pelayanan'] as $index => $data) {
 			$pilih_pelanggan = $pelanggan;

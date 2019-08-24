@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>Report - Transaksi</title>
   <style>
         * {
             padding: 0;
@@ -43,10 +43,6 @@
             width: 250px;
             border-radius: 10px;
             margin: 15px;
-        }
-
-        table {
-            width: 100%;
         }
 
         table {
@@ -90,9 +86,10 @@
             margin-top: 30px;
             font-size: 10pt;
         }
-        /* table tbody tr:hover {
+        table tbody tr:hover {
             background-color: #f5f5f5;
-        } */
+        }
+
         table tbody tr td {
             position: relative;
             padding: 15px;
@@ -100,6 +97,31 @@
             font-weight: 500;
             color: rgba(0,0,0,0.84);
             border: 1px rgba(0,0,0,0.1) solid;
+        }
+
+
+        table {
+            font-family: Verdana;
+            font-size: 14px;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            padding: 10px;
+            text-align: left;
+            margin: 0;
+        }
+
+        tbody tr:nth-child(2n){
+            background-color: #eee;
+        }
+
+        th {
+            position: sticky;
+            top: 0;
+            background-color: #333;
+            color: white;
         }
 
         ul {
@@ -142,9 +164,20 @@
 
     </style>
 </head>
-<body class="container">
+    <body class="container">
         <div class="card-body next-page">
-            <h2 align="center">Laporan Transaksi</h2>
+            <div style="text-align: right; margin-right: 30px;">
+                <div>
+                    <?php $image_path = '/img/logo-small.png'; ?>
+                    <img
+                        src="{{ public_path() . $image_path }}"
+                        style="width=180px; height=180px; margin-left: 10px;" />
+                </div>
+                <h2>Shoeklin Care & Treatment</h2>
+                <p>Jalan Jatisampay No. 142 Majalengka Wetan Kab. Majalengka - Jawa Barat</p>
+                <br>
+                <h3>Laporan Transaksi</h3>
+            </div>
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -156,7 +189,7 @@
                         <th>Nama Pelanggan</th>
                         <th>Tipe Sepatu</th>
                         <th>Total Harga</th>
-                        <th>Status Pengiriman</th>    
+                        <th>Status Pengiriman</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -183,12 +216,8 @@
                         <td colspan="8" align="right">Total Pendapatan</td>
                         <td>Rp. {{ $total_trx }}</td>
                     </tr>
-                </tbody>                
+                </tbody>
             </table>
         </div>
-
-
-    </div>
-  
-</body>
+    </body>
 </html>

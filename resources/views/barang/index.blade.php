@@ -5,13 +5,13 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h3 class="page-header">Barang</h3>
+                <h3 class="page-header">Bahan Baku</h3>
             </div>
         </div>
         <div class="row">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <i class="fa fa-group fa-fw"></i> List Barang
+                    <i class="fa fa-group fa-fw"></i> List Bahan Baku
                 </div>
                 <br>
                 <div class="panel-body top-operation">
@@ -33,9 +33,9 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama Barang</th>
-                                    <th>Jumlah Barang</th>
-                                    <th>Jenis Barang</th>
+                                    <th>Nama Bahan Baku</th>
+                                    <th>Jumlah Bahan Baku</th>
+                                    <th>Jenis Bahan Baku</th>
                                     <th>Satuan</th>
                                     <th class="text-right"></th>
                                 </tr>
@@ -62,10 +62,10 @@
                                             </button>
                                         </a>
                                         <a href="#">
-                                            <button 
+                                            <button
                                                 onclick="deleteModal('{{ $barangs->id }}')"
-                                                class="btn btn-danger" 
-                                                data-toggle="modal" 
+                                                class="btn btn-danger"
+                                                data-toggle="modal"
                                                 data-target="#confirmDelete">
                                                 <i class="fa fa-trash fa-fw"></i>Delete
                                             </button>
@@ -226,7 +226,7 @@
         });
     }
     $(document).ready(function () {
-        
+
     });
 </script>
 @endsection

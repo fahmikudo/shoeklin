@@ -21,7 +21,7 @@
 @media print {
   @page { margin: 0; size: 210mm 140mm; }
   body { margin: 0.6cm; }
-  
+
 }
 </style>
 
@@ -45,7 +45,8 @@
     					{{ $transaksi->pelanggan()->first()->nama_pelanggan }}<br>
     					{{ $transaksi->pelanggan()->first()->alamat_pelanggan }}<br>
     					{{ $transaksi->pelanggan()->first()->no_telepon }}<br>
-    				</address>
+                    </address>
+                    <address>* Nota harap dibawa saat pengambilan</address>
     			</div>
     			<div class="col-xs-6">
     				<table class="pull-right">
@@ -79,7 +80,7 @@
     		</div>
     	</div>
     </div>
-    
+
     <div class="row">
     	<div class="col-md-12">
     		<div class="panel panel-default">
@@ -114,8 +115,8 @@
                             </tr>
                         </tbody>
                     </table>
-    			</div>
-    		</div>
+                </div>
+            </div>
     	</div>
     </div>
 </div>
