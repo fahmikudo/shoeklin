@@ -17,7 +17,8 @@
 	<script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
     <script src="{{ asset('js/metisMenu.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-	{{-- <script src="{{ asset('js/sb-admin-2.js')}}"></script> --}}
+    {{-- <script src="{{ asset('js/sb-admin-2.js')}}"></script> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
     <!-- Fonts -->
     {{-- <link rel="dns-prefetch" href="//fonts.gstatic.com">

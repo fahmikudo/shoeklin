@@ -26,9 +26,11 @@ class JenisPelayananController extends Controller
         $data = $request->except('_token');
         $nama_pelayanan = $data['nama_pelayanan'];
         $harga_pelayanan = $data['harga_pelayanan'];
+        $durasi_pelayanan = $data['durasi_pelayanan'];
         $rest = JenisPelayanan::Add([
             'nama_pelayanan' => $nama_pelayanan,
-            'harga_pelayanan' => $harga_pelayanan
+            'harga_pelayanan' => $harga_pelayanan,
+            'durasi_pelayanan' => $durasi_pelayanan
         ]);
 
         if($rest)
@@ -47,10 +49,12 @@ class JenisPelayananController extends Controller
         $idJenisPelayanan = $request['id-jenis-pelayanan'];
         $nama_pelayanan = $request['nama_pelayanan'];
         $harga_pelayanan = $request['harga_pelayanan'];
+        $durasi_pelayanan = $request['durasi_pelayanan'];
 
         $data = [
             'nama_pelayanan' => $nama_pelayanan,
-            'harga_pelayanan' => $harga_pelayanan
+            'harga_pelayanan' => $harga_pelayanan,
+            'durasi_pelayanan' => $durasi_pelayanan
         ];
 
         $rest = JenisPelayanan::Edit($data, $idJenisPelayanan);

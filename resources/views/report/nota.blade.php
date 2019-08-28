@@ -19,7 +19,7 @@
     border-top: 2px solid;
 }
 @media print {
-  @page { margin: 0; size: 210mm 140mm; }
+  @page { margin: 0; size: 210mm 210mm; }
   body { margin: 0.6cm; }
 
 }
@@ -115,6 +115,21 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <div style="margin-left: 30; margin-top: 30">
+                        Hormat Kami,
+                        <br><br><br><br><br>
+                        {{ Auth::user()->name }}
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="pull-right" style="margin-right: 30; margin-top: 30;">
+                        <br><br><br><br><br>
+                        Pelanggan
+                    </div>
                 </div>
             </div>
     	</div>
