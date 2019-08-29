@@ -15,10 +15,12 @@ class JenisPelayananSeeder extends Seeder
         $arr = [
             [
                 'nama_pelayanan' => 'Reguler',
+                'durasi_pelayanan' => 3,
                 'harga_pelayanan' => 1000
             ],
             [
                 'nama_pelayanan' => 'Express',
+                'durasi_pelayanan' => 1,
                 'harga_pelayanan' => 5000
             ]
         ];

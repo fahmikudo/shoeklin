@@ -49,8 +49,9 @@
                                 <div class="form-group col-md-6">
                                     <label>Tanggal Keluar</label>
                                     <input
+                                        readonly
                                         name="tanggal_keluar"
-                                        type="date"
+                                        type="text"
                                         required
                                         class="form-control">
                                 </div>
@@ -143,7 +144,7 @@
                                                         class="form-control">
                                                             <option value="">Pilih Jenis Pelayanan</option>
                                                         @foreach($jenis_pelayanan as $jp)
-                                                            <option value="{{ $jp->id }}" data-harga="{{ $jp->harga_pelayanan }}">
+                                                            <option value="{{ $jp->id }}" data-harga="{{ $jp->harga_pelayanan }}" data-durasi="{{ $jp->durasi_pelayanan }}">
                                                                 {{ $jp->nama_pelayanan.' : '.$jp->harga_pelayanan }}
                                                             </option>
                                                         @endforeach
@@ -298,6 +299,7 @@
         hitungSemua = () => {
             let total_harga = $('input[name="total_harga"]')
             let semua = $('input[name="jumlah_sepatu[]"]').length;
+            let durasi_terlama = 0;
             let total = 0;
             for (i = 0; i < semua; i++) {
                 let jenpel = $('select[name="jenis_pelayanan[]"]')[i];
@@ -305,12 +307,20 @@
                 jenpel = $('select[name="jenis_pelayanan[]').children()[jenpel]
                 let harga = $(jenpel).attr('data-harga')
 
+                let durasi = $(jenpel).attr('data-durasi')
+                if (durasi > durasi_terlama) durasi_terlama = parseInt(durasi)
+
                 if(typeof harga == "undefined") break;
 
                 let jumlah = $('input[name="jumlah_sepatu[]"]')[i];
                 jumlah = $(jumlah).val()
                 jumlah = Number(jumlah) * Number(harga)
                 total += jumlah;
+            }
+            if (durasi_terlama > 0) {
+                let date = new Date($('input[name="tanggal_masuk"]').val())
+                date = moment(date).add(durasi_terlama, 'days').format('MM-DD-YYYY')
+                $('input[name="tanggal_keluar"]').val(date)
             }
 
             let jarak_pengiriman = $('input[name="jarak_pengiriman"]').val()
@@ -387,7 +397,6 @@
             .done(function(data) {
                 if (data.status === 'success') {
                     // call function get
-                    $('input[name="tanggal_keluar"]').val("")
                     $('input[name="jarak_pengiriman"]').val("")
                     $('input[name="jarak_pengiriman"]').attr('readonly', true)
                     $('select[name="tipe_pengambilan"]').val("")
@@ -397,6 +406,7 @@
                     $('input[name="input_pelanggan[nama]"]').val('');
                     $('input[name="input_pelanggan[alamat]"]').val('');
                     $('input[name="input_pelanggan[no_telepon]"]').val('');
+                    $('input[name="tanggal_keluar"]').val("")
                     hitungSemua()
                     getData();
                     swal("Informasi", "Data berhasil Disimpan!", "success");

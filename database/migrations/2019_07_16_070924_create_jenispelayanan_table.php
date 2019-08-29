@@ -16,6 +16,7 @@ class CreateJenispelayananTable extends Migration
         Schema::create('jenispelayanan', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nama_pelayanan');
+            $table->integer('durasi_pelayanan');
             $table->integer('harga_pelayanan');
             $table->timestamps();
         });

@@ -64,7 +64,7 @@
                                             <td>{{ Auth::user()->name }}</td>
                                             <td>{{ $trx->status_pengiriman }}</td>
                                             <td>
-                                                <a href="{{ route('pengembalian-index', ['id_delete' => $trx->id ]) }}" class="btn btn-success">Sudah dikirim</a>
+                                                <a href="{{ route('pengembalian-index', ['id_delete' => $trx->id ]) }}" class="btn btn-success">SUDAH DITERIMA</a>
                                             </td>
                                         </tr>
                                         @endforeach

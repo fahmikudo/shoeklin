@@ -35,6 +35,7 @@
                                     <th>No</th>
                                     <th>Nama Jenis Pelayanan</th>
                                     <th>Harga Pelayanan</th>
+                                    <th>Durasi Pelayanan</th>
                                     <th class="text-right"></th>
                                 </tr>
                             </thead>
@@ -46,6 +47,7 @@
                                     <td>{{ $index }}</td>
                                     <td>{{ $jp->nama_pelayanan }}</td>
                                     <td>{{ $jp->harga_pelayanan }}</td>
+                                    <td>{{ $jp->durasi_pelayanan }}</td>
                                     <td class="detail-info" href="#">
                                         <a class="detail-info" href="#">
                                             <button
@@ -98,6 +100,10 @@
                                             <label for="harga-jenis-pelayanan">Harga Jenis Pelayanan</label>
                                             <input type="text" class="form-control" name="harga_pelayanan" required placeholder="Harga Pelayanan">
                                         </div>
+                                        <div class="form-group">
+                                            <label for="harga-jenis-pelayanan">Durasi Pelayanan</label>
+                                            <input type="text" class="form-control" name="durasi_pelayanan" required placeholder="Harga Pelayanan">
+                                        </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -126,6 +132,10 @@
                                         <div class="form-group">
                                             <label for="nama-project">Harga Jenis Pelayanan</label>
                                             <input type="text" class="form-control" name="harga_pelayanan" required id="edit-harga-pelayanan" placeholder="Harga Pelayanan">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="nama-project">Durasi Pelayanan</label>
+                                            <input type="text" class="form-control" name="durasi_pelayanan" required id="edit-durasi-pelayanan" placeholder="Durasi Pelayanan">
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -197,6 +207,7 @@
                 $('#edit-id-jenis-pelayanan').val(response[0].id);
                 $('#edit-jenis-pelayanan').val(response[0].nama_pelayanan);
                 $('#edit-harga-pelayanan').val(response[0].harga_pelayanan);
+                $('#edit-durasi-pelayanan').val(response[0].durasi_pelayanan);
             }
         });
     }
