@@ -128,7 +128,7 @@
                 <div class="col-xs-6">
                     <div class="pull-right" style="margin-right: 30; margin-top: 30;">
                         <br><br><br><br><br>
-                        Pelanggan
+                        {{ $transaksi->pelanggan()->first()->nama_pelanggan }}<br>
                     </div>
                 </div>
             </div>
