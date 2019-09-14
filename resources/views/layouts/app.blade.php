@@ -12,6 +12,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js" defer></script>
 	{{-- <script src="{{ asset('js/jquery.cookie.js') }}"></script> --}}
 	<script src="{{ asset('js/bootstrap.min.js') }}"></script>
 	<script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
@@ -34,6 +35,8 @@
     <link href="{{ asset('font-awesome/css/font-awesome.min.css') }}" rel="stylesheet"/>
     <link rel="shortcut icon" href="{{ asset('img/favicon.ico')}}" type="image/x-icon"/>
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet" />
+    <link href="{{ asset('css/select2-bootstrap.min.css') }}" rel="stylesheet"/>
     <style>
         body {
             overflow-x: hidden;

@@ -57,7 +57,7 @@
                                             <th>Jenis Pelayanan</th>
                                             <th>Tipe Sepatu</th>
                                             <th>Total Harga</th>
-                                            <th>Status Pengiriman</th>
+                                            <th>Status Pengambilan</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>

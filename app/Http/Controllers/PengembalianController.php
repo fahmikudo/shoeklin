@@ -12,13 +12,13 @@ class PengembalianController extends Controller
     {
         if ($req['id_delete']) {
             $data = Transaksi::find($req['id_delete']);
-            $data->status_pengiriman = "SUDAH DIKIRIM";
+            $data->status_pengiriman = "SUDAH DIAMBIL";
             $data->save();
             return back();
         }
         if ($req['keyword']) {
             $data = Transaksi::where('no_transaksi',$req['keyword'])
-            ->where('status_pengiriman','BELUM DIKIRIM')
+            ->where('status_pengiriman','BELUM DIAMBIL')
             ->where('tipe_pengambilan','diambil')
             ->get();
         } else {

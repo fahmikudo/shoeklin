@@ -28,14 +28,12 @@ class PelangganController extends Controller
         $nomor_telepon = $request['no_telepon'];
         $status = $request['status_member'];
         $alamat = $request['alamat_pelanggan'];
-        $jumlah_pencucian = $request['jumlah_pencucian'];
 
         $rest = Pelanggan::Add([
             'nama_pelanggan' => $nama_pelanggan,
             'no_telepon' => $nomor_telepon,
             'status_member' => $status,
-            'alamat_pelanggan' => $alamat,
-            'jumlah_pencucian' => $jumlah_pencucian
+            'alamat_pelanggan' => $alamat
         ]);
 
         if($rest)
@@ -55,14 +53,12 @@ class PelangganController extends Controller
         $nomor_telepon = $request['no_telepon'];
         $status = $request['status_member'];
         $alamat = $request['alamat_pelanggan'];
-        $jumlah_pencucian = $request['jumlah_pencucian'];
 
         $data = [
             'nama_pelanggan' => $nama_pelanggan,
             'no_telepon' => $nomor_telepon,
             'status_member' => $status,
-            'alamat_pelanggan' => $alamat,
-            'jumlah_pencucian' => $jumlah_pencucian
+            'alamat_pelanggan' => $alamat
         ];
 
         $rest = Pelanggan::Edit($data, $idPelanggan);
