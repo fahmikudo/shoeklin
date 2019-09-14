@@ -71,7 +71,7 @@ class PenyerahanController extends Controller
 			$jenis_pelayanan = $req['jenis_pelayanan'][$index];
 			$tipe_sepatu = $req['tipe_sepatu'][$index];
 			$jumlah_sepatu = $req['jumlah_sepatu'][$index];
-			$tipe_pengambilan = $req['tipe_pengambilan'];
+			$tipe_pengambilan = $req['tipe_pengambilan'][$index];
 			$jarak_pengiriman = $req['jarak_pengiriman'] ? $req['jarak_pengiriman'] : 0;
 			$total_harga = $cekJumlahTransaksi == $promo && $cekStatusMemberPelanggan == "MEMBER" ? 0 : $req['total_harga'];
 
@@ -81,6 +81,7 @@ class PenyerahanController extends Controller
 				'tanggal_selesai' => $tanggal_keluar,
 				'tipe_sepatu' => $tipe_sepatu,
 				'tipe_pengambilan' => $tipe_pengambilan,
+				'status_pengiriman' => $tipe_pengambilan == "diambil" ? "BELUM DIAMBIL" : "BELUM DIKIRIM",
 				'jarak_pengiriman' => $jarak_pengiriman,
 				'jumlah_sepatu' => $jumlah_sepatu,
 				'harga_total' => $total_harga,

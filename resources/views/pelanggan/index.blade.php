@@ -37,7 +37,6 @@
                                     <th>Alamat</th>
                                     <th>No. Telepon</th>
                                     <th>Status Member</th>
-                                    <th>Jumlah Pencucian</th>
                                     <th class="text-right"></th>
                                 </tr>
                             </thead>
@@ -51,7 +50,6 @@
                                     <td>{{ $plg->alamat_pelanggan }}</td>
                                     <td>{{ $plg->no_telepon }}</td>
                                     <td>{{ $plg->status_member }}</td>
-                                    <td>{{ $plg->jumlah_pencucian }}</td>
                                     <td style="width: 200px;" class="detail-info" href="#">
                                         <a class="detail-info" href="#">
                                             <button
@@ -116,10 +114,6 @@
                                             <label for="nama-project">Alamat</label>
                                             <input type="text" class="form-control" name="alamat_pelanggan" required id="alamat" placeholder="Alamat">
                                         </div>
-                                        <div class="form-group">
-                                            <label for="nama-project">Jumlah Pencucian</label>
-                                            <input type="text" class="form-control" name="jumlah_pencucian" required id="jumlah-pencucian" placeholder="Jumlah Pencucian">
-                                        </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -160,10 +154,6 @@
                                         <div class="form-group">
                                             <label for="nama-project">Alamat</label>
                                             <input type="text" class="form-control" name="alamat_pelanggan" required id="edit-alamat" placeholder="Alamat">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="nama-project">Jumlah Pencucian</label>
-                                            <input type="text" class="form-control" name="jumlah_pencucian" required id="edit-jumlah-pencucian" placeholder="Alamat">
                                         </div>
                                     </div>
                                     <div class="modal-footer">

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 class Transaksi extends Model
 {
 	protected $table = 'transaksi';
-	protected $fillable = ['no_transaksi', 'tanggal_masuk', 'tanggal_selesai', 'tipe_sepatu', 'jumlah_sepatu', 'harga_total', 'id_pelanggan', 'id_pelayanan', 'id_pegawai', 'tipe_pengambilan', 'jarak_pengiriman'];
+	protected $fillable = ['no_transaksi', 'tanggal_masuk', 'tanggal_selesai', 'tipe_sepatu', 'jumlah_sepatu', 'harga_total', 'id_pelanggan', 'id_pelayanan', 'id_pegawai', 'tipe_pengambilan', 'jarak_pengiriman', 'status_pengiriman'];
 
     public function pelanggan() {
         return $this->hasMany('App\Pelanggan','id','id_pelanggan');
@@ -101,6 +101,7 @@ class Transaksi extends Model
 			->join('tipe_sepatu', 'tipe_sepatu.id', '=', 'transaksi.tipe_sepatu')
 			->whereBetween('transaksi.created_at', [$tglAwal, $tglAkhir])
 			->where('status_pengiriman','SUDAH DIKIRIM')
+			->orWhere('status_pengiriman','SUDAH DIAMBIL')
 			->orderBy('transaksi.id', $sort)
 			->get();
 		} else {

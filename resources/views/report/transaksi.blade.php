@@ -204,7 +204,7 @@
                         <td>{{ $trx->nama_pelayanan }}</td>
                         <td>{{ $trx->nama_pelanggan }}</td>
                         <td>{{ $trx->tipe_sepatu }}</td>
-                        <td>{{ $trx->harga_total }}</td>
+                        <td>{{ Rupiah::getRupiah($trx->harga_total) }}</td>
                         <td>{{ $trx->status_pengiriman }}</td>
                     </tr>
                     @endforeach
@@ -214,7 +214,7 @@
                     </tr>
                     <tr>
                         <td colspan="8" align="right">Total Pendapatan</td>
-                        <td>Rp. {{ $total_trx }}</td>
+                        <td>{{ Rupiah::getRupiah($total_trx) }}</td>
                     </tr>
                 </tbody>
             </table>

@@ -88,18 +88,6 @@
                                 </div>
 
                                 <div class="form-group col-md-6">
-                                    <label>Tipe Pengambilan</label>
-                                    <select
-                                        required
-                                        name="tipe_pengambilan"
-                                        class="form-control">
-                                        <option value="">Pilih Tipe Pengambilan</option>
-                                        <option value="diantar">Diantar</option>
-                                        <option value="diambil">Diambil sendiri</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group col-md-6">
                                     <label>Jarak Tujuan Pengiriman</label>
                                     <div class="input-group">
                                         <input
@@ -128,7 +116,8 @@
                                             <tr>
                                                 <th>Jenis Pelayanan</th>
                                                 <th>Tipe Sepatu</th>
-                                                <th>Jumlah Sepatu</th>
+                                                <th width="10%">Jumlah Sepatu</th>
+                                                <th>Tipe Pengambilan</th>
                                                 <th>Satuan</th>
                                                 <th>Keterangan</th>
                                                 <th>Action</th>
@@ -175,6 +164,16 @@
                                                         class="form-control" />
                                                 </td>
                                                 <td>
+                                                <select
+                                                    required
+                                                    name="tipe_pengambilan[]"
+                                                    class="form-control">
+                                                    <option value="">Pilih Tipe Pengambilan</option>
+                                                    <option value="diantar">Diantar</option>
+                                                    <option value="diambil">Diambil sendiri</option>
+                                                </select>
+                                                </td>
+                                                <td>
                                                 Satu Pasang
                                                 </td>
                                                 <td>
@@ -204,7 +203,7 @@
                                             <th>Jenis Pelayanan</th>
                                             <th>Tipe Sepatu</th>
                                             <th>Total Harga</th>
-                                            <th>Status Pengiriman </th>
+                                            <th>Status</th>
                                         </tr>
                                     </thead>
                                     <tbody id="get-data"></tbody>
@@ -239,7 +238,7 @@
                         <td>'+data[i].tanggal_selesai+'</td>\
                         <td>'+data[i].nama_pelayanan+'</td>\
                         <td>'+data[i].tipe_sepatu+'</td>\
-                        <td>'+ hartot +'</td>\
+                        <td>Rp. '+ formatRupiah(String(hartot)) +'</td>\
                         <td>'+data[i].status_pengiriman+'</td>\
                     </tr>';
                 data[i]
@@ -256,12 +255,17 @@
 
     }
     $(document).ready(function() {
-        $('select[name="tipe_pengambilan"]').on("change", function(e) {
+        $('select[name="pilih_pelanggan"]').select2({
+            theme: "bootstrap"
+        })
+
+        $(document).on("change", 'select[name="tipe_pengambilan[]"]', function(e) {
             let tipe_dipilih = $(this).val()
             let inputjp = $('input[name="jarak_pengiriman"]')
             if(tipe_dipilih == "diantar") {
                 $(inputjp).removeAttr("readonly")
                 $(inputjp).attr("required", true)
+                hitungSemua()
             } else {
                 $(inputjp).removeAttr("required")
                 $(inputjp).attr("readonly",true);
@@ -317,7 +321,7 @@
                 jumlah = Number(jumlah) * Number(harga)
                 total += jumlah;
             }
-            if (durasi_terlama > 0) {
+            if (durasi_terlama >= 0) {
                 let date = new Date($('input[name="tanggal_masuk"]').val())
                 date = moment(date).add(durasi_terlama, 'days').format('MM-DD-YYYY')
                 $('input[name="tanggal_keluar"]').val(date)
@@ -359,7 +363,7 @@
                 pilpel.attr('required', true)
             } else {
                 pilpel.removeAttr('required')
-                pilpel.val('');
+                pilpel.val("").trigger("change")
                 inpel1.attr('required',true)
                 inpel2.attr('required',true)
                 inpel3.attr('required',true)
@@ -400,7 +404,7 @@
                     $('input[name="jarak_pengiriman"]').val("")
                     $('input[name="jarak_pengiriman"]').attr('readonly', true)
                     $('select[name="tipe_pengambilan"]').val("")
-                    $('select[name="pilih_pelanggan"]').val("")
+                    $('select[name="pilih_pelanggan"]').val("").trigger("change")
                     $('#table-cart').find('tbody').html('')
                     $('#table-cart').find('tbody').append(input)
                     $('input[name="input_pelanggan[nama]"]').val('');
@@ -424,5 +428,22 @@
 
         });
     });
+
+    function formatRupiah(angka, prefix) {
+        var number_string = angka.replace(/[^,\d]/g, "").toString(),
+            split = number_string.split(","),
+            sisa = split[0].length % 3,
+            rupiah = split[0].substr(0, sisa),
+            ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+        // tambahkan titik jika yang di input sudah menjadi angka ribuan
+        if (ribuan) {
+            separator = sisa ? "." : "";
+            rupiah += separator + ribuan.join(".");
+        }
+
+        rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
+        return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
+    }
 </script>
 @endsection

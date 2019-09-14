@@ -26,7 +26,9 @@ class CreateTransaksiTable extends Migration
             $table->string('jarak_pengiriman');
             $table->enum('status_pengiriman', [
                 'BELUM DIKIRIM', 
-                'SUDAH DIKIRIM'
+                'SUDAH DIKIRIM',
+                'SUDAH DIAMBIL',
+                'BELUM DIAMBIL'
             ])->default('BELUM DIKIRIM');
             $table->unsignedBigInteger('id_pelanggan');
             $table->unsignedBigInteger('id_pelayanan');
